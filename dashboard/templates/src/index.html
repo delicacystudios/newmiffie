@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-700">
+    <div id="header" class="header-2 sticky w-full top-0">
+        <nav class="bg-gray-800 border-white py-2 md:py-4">
+            <div class="container px-4 mx-auto md:flex md:items-center">
+                <div class="flex justify-between items-center">
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 hidden">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <a href="#" class="font-bold text-xl text-blue-300">Miffie</a>
+                    
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            
+                <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
+                    <a href="/" class="p-2 lg:px-4 md:mx-2 text-white rounded bg-blue-400">Главная</a>
+                    <a href="/features" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Возможности</a>
+                    <a href="/commands" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Команды</a>
+                    <a href="/dashboard" class="p-2 lg:px-4 md:mx-2 text-blue-300 text-center border border-solid border-blue-400 rounded hover:bg-blue-400 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">Панель Управления</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="min-h-screen">
+        <div id="content">
+            <div class="py-6 md:py-12 grid place-items-center h-screen">
+                <div class="container px-4 mx-auto">
+                    <div class="text-center max-w-2xl mx-auto">
+                        <h1 class="text-3xl md:text-4xl text-white font-medium mb-2">Miffie</h1>
+                        <h2 class="text-2xl md:text-2xl text-white font-medium mb-2">Новый универсальный бот для вашего сервера.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        let toggleBtn = document.querySelector("#navbar-toggle");
+        let collapse = document.querySelector("#navbar-collapse");
+
+        toggleBtn.onclick = () => {
+            collapse.classList.toggle("hidden");
+            collapse.classList.toggle("flex");
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "newmiffie",
+  "version": "1.0.0",
+  "description": "Новый и многофункциональный дискорд бот",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delicacystudios/newmiffie.git"
+  },
+  "keywords": [],
+  "author": "NateAles#0009",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/delicacystudios/newmiffie/issues"
+  },
+  "homepage": "https://github.com/delicacystudios/newmiffie#readme",
+  "dependencies": {
+    "ascii-table": "^0.0.9",
+    "body-parser": "^1.20.0",
+    "chalk": "^5.0.1",
+    "cpu-stat": "^2.0.1",
+    "discord.js": "^13.8.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "figlet": "^1.5.2",
+    "fs": "^0.0.1-security",
+    "memorystore": "^1.6.7",
+    "moment": "^2.29.3",
+    "moment-duration-format": "^2.3.2",
+    "mongoose": "^6.3.8",
+    "passport": "^0.6.0",
+    "passport-discord": "^0.1.4",
+    "quick.db": "^9.0.3",
+    "string-width": "^5.1.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "node": "^16.13.2"
+  }
+}

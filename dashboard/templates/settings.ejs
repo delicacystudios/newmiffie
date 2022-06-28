@@ -1,0 +1,55 @@
+<%- include("partials/header", { bot, user, path, title: `Панель управления | ${guild.name}` }) %>
+
+<div class="min-h-screen w-full">
+  <div id="content">
+    <div class="grid grid-cols-5 grid-rows-1">
+      <%- include("partials/sidebarDashboard", { bot, user, path, guild }) %>
+        
+      <div class="col-span-5 md:col-span-4 mx-3">
+        <div class="bg-slate-700 container mx-auto mt-4">
+          <h1 class="text-white text-2xl mb-3">Настройки</h1>
+
+          <% if (alert) { %>
+            <div class="bg-teal-500 border-t-4 border-teal-700 rounded-b text-teal-900 px-4 py-3 shadow-md my-4" role="alert">
+              <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-white mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                  <p class="font-bold text-white text-shadow-md"><%= alert %></p>
+                  <!--<p class="text-sm">Описание</p>-->
+                </div>
+              </div>
+            </div>
+          <% } %>
+            
+          <div class="bg-gray-800 p-3">
+            <div class="grid grid-cols-1 gap-4">
+              <h1 class="text-white text-2xl">Команды</h1>
+              <h1 class="text-gray-400 text-sm mb-2">Основные настройки команд</h1>
+              <div class="w-full px-5 py-5 border-t-[1px] border-gray-700">
+                <div class="grid grid-cols-1">
+                  <form id="prefixForm" method="post">
+                    <div class="grid grid-cols-1">
+                      <label class="text-gray-400">Префикс</label>
+                      <input class="rounded-md bg-slate-700 my-2 p-2 text-white" type="text" name="prefix" value="<%= settings.prefix %>">
+                      <div class="flex">
+                        <div class="bg-gray-900 border-1 border-black text-gray-400 rounded-md px-1 mr-1"><span class="font-bold text-white"><%= settings.prefix %></span>help</div>
+                        <div class="bg-gray-900 border-1 border-black  text-gray-400 rounded-md px-1 mr-1"><span class="font-bold text-white"><%= settings.prefix %></span>ascii hello</div>
+                      </div>
+                    </div>
+                  
+                    <div class="grid content-end justify-end mt-10">
+                      <input type="submit" name="prefixSubmit" value="Сохранить" class="border border-solid border-blue-400 px-3 py-1 rounded text-blue-400 opacity-75 hover:opacity-100">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+<%- include("partials/footer") %>

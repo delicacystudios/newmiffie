@@ -1,0 +1,78 @@
+<%- include("partials/header", { bot, user, path, title: `Панель управления | ${guild.name}` }) %>
+
+<div class="min-h-screen w-full">
+  <div id="content">
+    <div class="grid grid-cols-5 grid-rows-1">
+      <%- include("partials/sidebarDashboard", { bot, user, path, guild }) %>
+
+      <div class="col-span-5 md:col-span-4 mx-3">
+        <div class="bg-slate-700 container mx-auto mt-5">
+          <div class="bg-gray-800 p-3">
+            <h1 class="text-white text-2xl mb-4">Управление Сервером</h1>
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
+
+              <div class="bg-slate-600 rounded-md w-full px-5 py-5">
+                <div class="grid grid-cols-1 grid-rows-2 gap-4">
+                  <div class="grid grid-cols-2 grid-rows-1 gap-4">
+                    <div class="grid justify-start content-center text-4xl">
+                        ⏰
+                    </div>
+                    <div class="grid justify-end content-center">
+                        
+                    </div>
+                  </div>
+
+                  <div>
+                    <h1 class="text-white">
+                      Скоро...
+                    </h1>
+
+                    <span class="text-gray-400">
+                      Скоро...
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!--
+              <div class="bg-slate-600 rounded-md w-full px-5 py-5">
+                  <form id="greetingsForm" action="!!!!!!!!!!!!!!!!!!!!!!!!!!!! СЮДЫ ДОБАВЬТЕ ССЫЛКУ !!!!!!!!!!!!!!!!!!!!!!!!!!!!" method="post">
+                      <input class="hidden" type="submit" name="submitHidden">
+
+                      <div class="grid grid-cols-1 grid-rows-2 gap-4">
+                          <div class="grid grid-cols-2 grid-rows-1 gap-4">
+                              <div class="grid justify-start content-center text-4xl">
+                                  👋
+                              </div>
+                              <div class="grid justify-end content-center">
+                                  <div class="mx-2">
+                                      <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                          <input type="checkbox" value="" id="default-toggle" class="sr-only peer" onchange="document.getElementById('greetingsForm').submit()">
+                                          <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-300"></div>
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div>
+                              <h1 class="text-white">
+                                  Приветствие
+                              </h1>
+
+                              <span class="text-gray-400">
+                                  Поприветствуйте своих участников
+                              </span>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<%- include("partials/footer") %>

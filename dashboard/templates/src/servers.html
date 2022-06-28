@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-700">
+    <div id="header" class="header-2 sticky w-full top-0">
+        <nav class="bg-gray-800 border-white py-2 md:py-4">
+            <div class="container px-4 mx-auto md:flex md:items-center">
+                <div class="flex justify-between items-center">
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 hidden">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <a href="#" class="font-bold text-xl text-blue-300">Miffie</a>
+
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            
+                <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
+                    <a href="/" class="p-2 lg:px-4 md:mx-2 text-white rounded bg-blue-400">Главная</a>
+                    <a href="/features" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Возможности</a>
+                    <a href="/commands" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Команды</a>
+                    <a href="/dashboard" class="p-2 lg:px-4 md:mx-2 text-blue-300 text-center border border-solid border-blue-400 rounded hover:bg-blue-400 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">Панель Управления</a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+
+    <div class="flex justify-center min-h-screen mt-5 container mx-auto">
+        <div id="content" class="mx-2">
+            <h1 class="text-white text-center text-5xl my-12">Выберите сервер</h1>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="server-card">          
+                    <div class="relative rounded-lg border-2 border-solid border-cyan-500 overflow-hidden h-44">
+                        <img class="object-cover w-full h-full" src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" loading="lazy">
+                        <div class="absolute h-full w-full py-2.5 bottom-0 inset-x-0 backdrop-blur-md">
+                            <img class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-full border-2 border-white blur-none" src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 mt-2 items-center">
+                        <div class="col-span-2">
+                            <div class="mx-2">
+                                <h5 class="text-white text-base font-medium">Название</h5>
+                                <p class="text-gray-500 text-sm">Владелец</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-end">
+                                <div class="mx-2">
+                                    <button type="button" class="
+                                        inline-block 
+                                        px-1.5 py-4
+                                        bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                                        hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg 
+                                        transition duration-150 ease-in-out">
+                                            Пригласить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>             
+                
+                <div class="server-card">          
+                    <div class="relative rounded-lg border-2 border-solid border-cyan-500 overflow-hidden h-44">
+                        <img class="object-cover w-full h-full" src="https://cdn.discordapp.com/icons/858102044669378581/7badf39e8e68d9a3362bd0f2d262ee47.jpg" loading="lazy">
+                        <div class="absolute h-full w-full py-2.5 bottom-0 inset-x-0 backdrop-blur-md">
+                            <img class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-full border-2 border-white blur-none" src="https://cdn.discordapp.com/icons/858102044669378581/7badf39e8e68d9a3362bd0f2d262ee47.jpg" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 mt-2 items-center">
+                        <div class="col-span-2">
+                            <div class="mx-2">
+                                <h5 class="text-white text-base font-medium">Длинное Название</h5>
+                                <p class="text-gray-500 text-sm">Администратор</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-end">
+                                <div class="mx-2">
+                                    <button type="button" class="
+                                        inline-block 
+                                        px-1.5 py-4
+                                        bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                                        hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg 
+                                        transition duration-150 ease-in-out">
+                                            Пригласить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>      
+
+                <div class="server-card">          
+                    <div class="relative rounded-lg border-2 border-solid border-cyan-500 overflow-hidden h-44">
+                        <img class="object-cover w-full h-full" src="https://cdn.discordapp.com/icons/988003008984023080/d528eff7e21326881e7ae98090576603.jpg" loading="lazy">
+                        <div class="absolute h-full w-full py-2.5 bottom-0 inset-x-0 backdrop-blur-md">
+                            <img class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-full border-2 border-white blur-none" src="https://cdn.discordapp.com/icons/988003008984023080/d528eff7e21326881e7ae98090576603.jpg" loading="lazy">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 mt-2 items-center">
+                        <div class="col-span-2">
+                            <div class="mx-2">
+                                <h5 class="text-white text-base font-medium">Очень Длинное Название</h5>
+                                <p class="text-gray-500 text-sm">Владелец</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-end">
+                                <div class="mx-2">
+                                    <button type="button" class="
+                                        inline-block 
+                                        px-1.5 py-4
+                                        bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                                        hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg 
+                                        transition duration-150 ease-in-out">
+                                            Пригласить
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>      
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let toggleBtn = document.querySelector("#navbar-toggle");
+        let collapse = document.querySelector("#navbar-collapse");
+
+        toggleBtn.onclick = () => {
+            collapse.classList.toggle("hidden");
+            collapse.classList.toggle("flex");
+        };
+    </script>
+</body>
+
+</html>

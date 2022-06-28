@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-700">
+    <div id="header" class="header-2 w-full sticky top-0">
+        <nav class="bg-gray-800 border-white py-2 md:py-4">
+            <div class="container px-4 mx-auto md:flex md:items-center">
+                <div class="flex justify-between items-center">
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 md:hidden" id="sidebar-toggle">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <a href="#" class="font-bold text-xl text-blue-300">Miffie</a>
+
+                    <button class="border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 md:hidden" id="navbar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            
+                <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
+                    <a href="/" class="p-2 lg:px-4 md:mx-2 text-white rounded bg-blue-400">Главная</a>
+                    <a href="/features" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Возможности</a>
+                    <a href="/commands" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-blue-200 hover:text-gray-700 transition-colors duration-300">Команды</a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+
+    <div class="min-h-screen w-full">
+        <div id="content">
+            <div class="grid grid-cols-5 grid-rows-1">
+                <div class="h-screen absolute hidden md:static md:block" id="sidebar-collapse">
+                    <div class="bg-gray-800">
+                        <aside class="h-screen" aria-label="Sidebar">
+                            <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+                                <ul class="space-y-2">
+                                    <li>
+                                        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <svg class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+                                            <span class="ml-3">Панель Управления</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <svg class="flex-shrik-0 nw-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                            <span class="flex-1 ml-3 whitespace-nowrap">Настройка</span>
+                                        </a>
+                                    </li>
+                               </ul>
+                               <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+                                    <li>
+                                        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z" clip-rule="evenodd"></path></svg>
+                                            <span class="ml-3">Сервер Поддержки</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                
+                <div class="col-span-5 md:col-span-4 mx-3">
+                    <div class="bg-slate-700 container mx-auto mt-5">
+                        <div class="bg-gray-800 p-3">
+                            <h1 class="text-white text-2xl mb-4">Управление Сервером</h1>
+                            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
+
+                                <div class="bg-slate-600 rounded-md w-full px-5 py-5">
+                                    <form id="greetingsForm" action="!!!!!!!!!!!!!!!!!!!!!!!!!!!! СЮДЫ ДОБАВЬТЕ ССЫЛКУ !!!!!!!!!!!!!!!!!!!!!!!!!!!!" method="post">
+                                        <input class="hidden" type="submit" name="submitHidden">
+
+                                        <div class="grid grid-cols-1 grid-rows-2 gap-4">
+                                            <div class="grid grid-cols-2 grid-rows-1 gap-4">
+                                                <div class="grid justify-start content-center text-4xl">
+                                                    👋
+                                                </div>
+                                                <div class="grid justify-end content-center">
+                                                    <div class="mx-2">
+                                                        <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                                                            <input type="checkbox" value="" id="default-toggle" class="sr-only peer" onchange="document.getElementById('greetingsForm').submit()">
+                                                            <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-300"></div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h1 class="text-white">
+                                                    Приветствие
+                                                </h1>
+            
+                                                <span class="text-gray-400">
+                                                    Поприветствуйте своих участников
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let navbarToggleBtn = document.querySelector("#navbar-toggle");
+        let navbarCollapse = document.querySelector("#navbar-collapse");
+
+        navbarToggleBtn.onclick = () => {
+            navbarCollapse.classList.toggle("hidden");
+            navbarCollapse.classList.toggle("flex");
+        };
+    </script>
+
+    <script>
+        let sidebarToggleBtn = document.querySelector("#sidebar-toggle");
+        let sidebarCollapse = document.querySelector("#sidebar-collapse");
+        
+        sidebarToggleBtn.onclick = () => {
+            sidebarCollapse.classList.toggle("hidden");
+            sidebarCollapse.classList.toggle("flex");
+        };
+    </script>
+</body>
+
+</html>

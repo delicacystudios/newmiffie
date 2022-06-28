@@ -1,0 +1,65 @@
+<%- include("partials/header", { bot, user, path, title: "Сервера | Miffie" }) %>
+
+<div class="flex justify-center min-h-screen mt-5 container mx-auto">
+  <div id="content" class="mx-2">
+    <h1 class="text-white text-center text-5xl my-12">Выберите сервер</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <% user.guilds.forEach(guild => {
+        const permsOnGuild = new perms(guild.permissions_new);
+        if (!permsOnGuild.has(perms.FLAGS.ADMINISTRATOR)) return;
+      %>
+        <div class="server-card">          
+          <div class="relative rounded-lg border-2 border-solid border-cyan-500 overflow-hidden h-44">
+            <img class="object-cover w-full h-full" src="<%- guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : `https://c.tenor.com/HQ_1LH5VzRUAAAAC/discord-loading.gif` %>" loading="lazy">
+            <div class="absolute h-full w-full py-2.5 bottom-0 inset-x-0 backdrop-blur-md">
+              <img class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-full border-2 border-white blur-none" src="<%- guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : `https://c.tenor.com/HQ_1LH5VzRUAAAAC/discord-loading.gif` %>" loading="lazy">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 mt-2 items-center">
+            <div class="col-span-2">
+              <div class="mx-2">
+                <h5 class="text-white text-base font-medium"><%= guild.name %></h5>
+                <!--<p class="text-gray-500 text-sm">Владелец</p>-->
+                <p class="text-gray-500 text-sm">Администратор</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-end">
+                <div class="mx-2">
+                  <% if (bot.guilds.cache.get(guild.id)) { %>
+                    <a href="/dashboard/<%- guild.id %>" class="
+                      inline-block 
+                      px-1.5 py-4
+                      bg-pink-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                      hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg 
+                      transition duration-150 ease-in-out" style="padding-left: 15px; padding-right: 15px">
+                        Настроить
+                    </a>
+                  <% } else { %>
+                    <a href="<%= `https://discordapp.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(`https://newmiffie.natedev.tk/callback`)}`  %>" class="
+                      inline-block 
+                      px-1.5 py-4
+                      bg-pink-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                      hover:bg-pink-700 hover:shadow-lg focus:bg-pink-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-800 active:shadow-lg 
+                      transition duration-150 ease-in-out" style="padding-left: 15px; padding-right: 15px">
+                        Пригласить
+                    </a>
+                  <% } %>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>                
+        </div>  
+      <%
+        });
+      %>
+    </div>
+  </div>
+</div>
+                    <br>
+                    <br>
+
+<%- include("partials/footer") %>
