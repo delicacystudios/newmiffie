@@ -16,6 +16,10 @@ module.exports = {
     error: '#fe8780'
   },
 
+  keys: {
+    CatKey: process.env['CatKey']
+  },
+
   port: 25565,
   CustomDomain: true,
   domain: "https://newmiffie.natedev.tk",
