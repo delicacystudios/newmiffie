@@ -98,8 +98,10 @@ client.on('messageCreate', async message => {
     storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
   };
 
-  const prefix = storedSettings.prefix
-  if (prefix === null) prefix = config.chat.prefix
+  let prefix = config.chat.prefix;
+  if (storedSettings && storedSettings.prefix) {
+    prefix = storedSettings.prefix;
+  }
   
   if (message.mentions.has(client.user.id)) {
     const mention = new MessageEmbed()

@@ -12,7 +12,7 @@ const guildSettingSchema = new Schema({
   },
   
   prefix: {
-    type: String,
+    type: String
   }
 })
 

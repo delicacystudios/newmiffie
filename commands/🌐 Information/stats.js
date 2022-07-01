@@ -52,8 +52,8 @@ module.exports = {
                 inline: true,
             },
             {
-                name: "API Latency",
-                value: `┕\`${message.client.ws.ping}ms\``,
+                name: "Shard",
+                value: `┕\`${message.guild.shard.id + 1}\``,
                 inline: true,
             }
           )
@@ -117,8 +117,8 @@ module.exports = {
                       inline: true,
                   },
                   {
-                      name: "API Latency",
-                      value: `┕\`${message.client.ws.ping}ms\``,
+                      name: "Shard",
+                      value: `┕\`${message.guild.shard.id + 1}\``,
                       inline: true,
                   }
                 )

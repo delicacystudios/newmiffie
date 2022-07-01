@@ -41,7 +41,7 @@ module.exports = {
           .setColor(config.embeds.color)
           .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
           .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
-          .setFooter({ text: `${client.user.name} © Все права защищены` })
+          .setFooter({ text: `${client.user.username} © Все права защищены` })
         message.channel.send({ embeds: [succ] })
 
         let newData = new schema({
@@ -55,7 +55,7 @@ module.exports = {
         .setColor(config.embeds.color)
         .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
         .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
-        .setFooter({ text: `${client.user.name} © Все права защищены` })
+        .setFooter({ text: `${client.user.username} © Все права защищены` })
       message.channel.send({ embeds: [succ] })
 
       let newData = new schema({

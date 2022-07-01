@@ -8,8 +8,7 @@ module.exports = async (client, message) => {
   if (!message.channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
     return;
   }
-  ///////
-  ////////////////////////////////
+
   const GuildSettings = require("../database/settings.js");
   let storedSettings = await GuildSettings.findOne({
     guildID: message.guild.id,
@@ -25,8 +24,10 @@ module.exports = async (client, message) => {
     storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
   };
 
-  if (storedSettings === null) prefix = config.chat.prefix
-  if (storedSettings != null) prefix = storedSettings.prefix
+  let prefix = config.chat.prefix;
+  if (storedSettings && storedSettings.prefix) {
+    prefix = storedSettings.prefix;
+  }
 
   if (message.content.indexOf(prefix) !== 0) return;
 
@@ -35,5 +36,4 @@ module.exports = async (client, message) => {
 
   const cmd = client.commands.get(command) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(command));
   if (cmd) cmd.run(client, message, args);
-
 }
