@@ -25,6 +25,7 @@ const ascii = require('ascii-table');
 const mongoose = require("mongoose");
 const GuildSettings = require("./database/settings.js");
 const Dashboard = require("./dashboard/dashboard.js");
+const myPromise = require('./myPromise')
 
 
 //---[ Loading Events ]---//
@@ -76,6 +77,9 @@ client.on("ready", async () => {
   }
 });
 
+process.on('unhandledRejection', () => {
+  Dashboard(client)
+});
 ////////////////////////////////////////////
 /////////////////////
 
@@ -85,19 +89,23 @@ client.on('messageCreate', async message => {
   if (message.content.includes("@here") || message.content.includes("@everyone")) return;
   const GuildSettings = require("./database/settings.js");
   let storedSettings = await GuildSettings.findOne({
-    guildID: message.guild.id,
+    guildID: message.guild.id
   });
 
   if (!storedSettings) {
     const newSettings = new GuildSettings({
-      guildID: message.guild.id,
+        guildID: message.guild.id
     });
-    await newSettings.save().catch((e) => {
-      console.log(e);
-    });
-    storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-  };
-
+    
+    try {
+      await newSettings.save()
+    } catch (e) {
+      console.log(e)
+      throw error
+    }
+    
+    storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
+  }
   let prefix = config.chat.prefix;
   if (storedSettings && storedSettings.prefix) {
     prefix = storedSettings.prefix;
@@ -114,7 +122,6 @@ client.on('messageCreate', async message => {
 })
 
 client.login(config.bot.token)
-
 mongoose.connect(config.bot.db, {
   useNewUrlParser: true,
   useUnifiedTopology: true

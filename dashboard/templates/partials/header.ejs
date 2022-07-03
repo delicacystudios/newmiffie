@@ -29,13 +29,13 @@
                 </div>
             
                 <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
-                    <a href="/" class="p-2 lg:px-4 md:mx-2 text-white rounded bg-pink-400">Главная</a>
+                    <a href="/" class="p-2 lg:px-4 md:mx-2 text-white rounded bg-pink-400 hover:bg-pink-500">Главная</a>
                     <a href="/features" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-purple-200 hover:text-gray-700 transition-colors duration-300">Возможности</a>
                     <a href="/commands" class="p-2 lg:px-4 md:mx-2 text-white rounded hover:bg-pink-200 hover:text-gray-700 transition-colors duration-300">Команды</a>
                     <% if (user) { %>
                       <a href="/dashboard" class="p-2 lg:px-4 md:mx-2 text-pink-300 text-center border border-solid border-pink-400 rounded hover:bg-pink-400 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">Панель Управления</a>
                     <% } else { %>
-                      <a href="/dashboard" class="p-2 lg:px-4 md:mx-2 text-white-300 text-center border border-solid border-pink-400 rounded hover:bg-pink-400 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">Авторизация</a>
+                      <a href="/dashboard" class="p-2 lg:px-4 md:mx-2 text-white text-center border border-solid border-pink-400 rounded hover:bg-pink-400 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">Авторизация</a>
                     <% } %>
                 </div>
             </div>

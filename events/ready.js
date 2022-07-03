@@ -19,7 +19,7 @@ module.exports = async (client) => {
     client.user.setActivity(activity[index], {type: "WATCHING"});
     i = i + 1
     if (i === activity.length) i = i - activity.length
-  },10000)
+  }, 10000)
   
   client.user.setStatus('idle');
 }

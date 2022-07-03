@@ -6,23 +6,28 @@ const Dashboard = require("../dashboard/dashboard.js");
 
 module.exports = async (client, message) => {
   if (!message.channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
-    return;
+    return
   }
 
   const GuildSettings = require("../database/settings.js");
   let storedSettings = await GuildSettings.findOne({
-    guildID: message.guild.id,
+    guildID: message.guild.id
   });
 
   if (!storedSettings) {
     const newSettings = new GuildSettings({
-      guildID: message.guild.id,
+        guildID: message.guild.id
     });
-    await newSettings.save().catch((e) => {
-      console.log(e);
-    });
-    storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
-  };
+    
+    try {
+      await newSettings.save()
+    } catch (e) {
+      console.log(e)
+      throw error
+    }
+    
+    storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
+  }
 
   let prefix = config.chat.prefix;
   if (storedSettings && storedSettings.prefix) {
