@@ -25,7 +25,7 @@ const ascii = require('ascii-table');
 const mongoose = require("mongoose");
 const GuildSettings = require("./database/settings.js");
 const Dashboard = require("./dashboard/dashboard.js");
-const myPromise = require('./myPromise')
+const myPromise = require('./myPromise');
 
 
 //---[ Loading Events ]---//
@@ -76,10 +76,6 @@ client.on("ready", async () => {
     await guild.members.fetch();
   }
 });
-
-process.on('unhandledRejection', () => {
-  Dashboard(client)
-});
 ////////////////////////////////////////////
 /////////////////////
 
@@ -122,6 +118,11 @@ client.on('messageCreate', async message => {
 })
 
 client.login(config.bot.token)
+
+process.on('unhandledRejection', () => {
+  myPromise(client)
+});
+
 mongoose.connect(config.bot.db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
