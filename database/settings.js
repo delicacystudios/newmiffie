@@ -1,5 +1,3 @@
-const config = require("../configs/config.js");
-const prefix = config.chat.prefix;
 const { Schema, model } = require("mongoose");
 
 const guildSettingSchema = new Schema({

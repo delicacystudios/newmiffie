@@ -10,7 +10,6 @@ module.exports = {
 
   run: async (client, message) => {
     if (message.author.id == ownerid) {
-
       let i0 = 0;
       let i1 = 10;
       let page = 1;
@@ -35,8 +34,8 @@ module.exports = {
       let msg = await message.channel.send({ embeds: [embed]})
 
       await msg.react("⬅");
-      await msg.react("❌");
       await msg.react("➡");
+      await msg.react("❌");
 
       let collector = msg.createReactionCollector(
         (reaction, user) => user.id === message.author.id
@@ -109,7 +108,7 @@ module.exports = {
         await reaction.users.remove(message.author.id);
       })
     } else {
-      return
+      return;
     }
   }
 }

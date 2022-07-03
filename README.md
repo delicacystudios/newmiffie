@@ -4,9 +4,9 @@
 <div align="centre"><img src="https://media.discordapp.net/attachments/984299199967408163/991358811740835901/Screenshot_2022-06-28_09-05-14.png"></div>
 
 ## ⚙️ System Requirements
-— Discord v13 (v13.8.0)
+— Discord v13 ( **v13** or newer )
 
-— NodeJS v16.13.2 (and newer ones)
+— NodeJS v16.13.2 ( or newer )
 
 ## 💘 Credits
 — [**DSvinka**](https://github.com/DSvinka)

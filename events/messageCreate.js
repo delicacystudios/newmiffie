@@ -16,16 +16,16 @@ module.exports = async (client, message) => {
 
   if (!storedSettings) {
     const newSettings = new GuildSettings({
-        guildID: message.guild.id
+      guildID: message.guild.id
     });
-    
+
     try {
       await newSettings.save()
     } catch (e) {
       console.log(e)
       throw error
     }
-    
+
     storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
   }
 

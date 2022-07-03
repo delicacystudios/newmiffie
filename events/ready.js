@@ -1,4 +1,5 @@
 const config = require('../configs/config.js');
+const Dashboard = require("../dashboard/dashboard.js");
 
 module.exports = async (client) => {
   console.log('——————————————————————————————————————————')
@@ -6,7 +7,7 @@ module.exports = async (client) => {
   console.log(`| ⚙️  ID Бота: ${client.user.id}`)
   console.log(`| ⚙️  Префикс бота: ${config.chat.prefix}`)
   console.log('——————————————————————————————————————————')
-
+  
   let i = 0;
   setInterval(() => {
     const activity = [
@@ -20,6 +21,10 @@ module.exports = async (client) => {
     i = i + 1
     if (i === activity.length) i = i - activity.length
   }, 10000)
-  
   client.user.setStatus('idle');
+
+  Dashboard(client);
+  for (const [id, guild] of client.guilds.cache) {
+    await guild.members.fetch();
+  }
 }
