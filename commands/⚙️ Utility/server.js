@@ -9,6 +9,37 @@ module.exports = {
   usage: "",
 
   run: async (client, message, args) => {
+    
+    //-- Prefix Stuff --//
+    const GuildSettings = require("../../database/settings.js");
+    let storedSettings = await GuildSettings.findOne({
+      guildID: message.guild.id
+    });
+
+    if (!storedSettings) {
+      const newSettings = new GuildSettings({
+        guildID: message.guild.id
+      });
+
+      try {
+        await newSettings.save()
+      } catch (e) {
+        console.log(e)
+        throw error
+      }
+
+      storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
+    }
+
+    let prefix = config.chat.prefix;
+    if (storedSettings && storedSettings.prefix) {
+      prefix = storedSettings.prefix;
+    }
+    
+    //-- Code --//
+    const guild = message.guild;
+    let avatar = guild.iconURL({ dynamic: true, size: 4096 }) ? guild.iconURL({ dynamic: true, size: 4096 }) : `https://media.discordapp.net/attachments/984299199967408163/986522852146679808/logo.png`;
+    
     if (!args[0]) {
       let verifLevels = {
         NONE: "Нет",
@@ -19,7 +50,8 @@ module.exports = {
       };
 
       const serverembed = new MessageEmbed()
-        .setThumbnail(message.guild.iconURL({ dynamic: true, size: 1024 }))
+        .setAuthor({ name: `Информация по серверу: ${message.guild.name}` })
+        .setThumbnail(avatar)
         .setColor(config.embeds.color)
         .addFields(
           {
@@ -28,7 +60,6 @@ module.exports = {
             > Всего участников: \`${message.guild.memberCount}\`
             > Людей: \`${message.guild.members.cache.filter((member) => !member.user.bot).size}\`
             > Ботов: \`${message.guild.members.cache.filter((member) => member.user.bot).size}\``,
-            inline: true
           },
           {
             name: `Статистика каналов`,
@@ -36,7 +67,6 @@ module.exports = {
             > Всего каналов: \`${message.guild.channels.cache.size}\` 
             > Текстовых каналов: \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_TEXT").size}\` 
             > Голосовых каналов: \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_VOICE").size}\``,
-            inline: true
           },
           {
             name: `Дополнительная информация`,
@@ -47,8 +77,15 @@ module.exports = {
             > Создатель: <@${message.guild.ownerId}>`
           }
         )
-        .setFooter({ text: `Сервер: ${message.guild.name}` })
+        .setFooter({ text: `Аватар сервера: ${prefix}server avatar` })
       message.channel.send({ embeds: [serverembed] })
+    }
+    
+    if (args.join(" ").toLowerCase() === 'avatar') {
+      const embed = new MessageEmbed()
+        .setColor(config.embeds.color)
+        .setImage(avatar)
+      message.channel.send({embeds: [embed]})
     }
   }
 }
