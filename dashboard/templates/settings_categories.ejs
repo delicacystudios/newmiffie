@@ -2,10 +2,12 @@
 
 <div class="min-h-screen w-full">
   <div id="content">
-    <div class="grid grid-cols-5 grid-rows-1">
-      <%- include("partials/sidebarDashboard", { bot, user, path, guild }) %>
+    <div class="grid grid-cols-7">
+      <div class="hidden md:block sm:col-span-1 md:col-span-2 lg:col-span-1">
+        <%- include("partials/sidebarDashboard", { bot, user, path, guild }) %>
+      </div>
 
-      <div class="col-span-5 md:col-span-4 mx-3">
+      <div class="col-span-7 md:justify-self-center md:w-3/4 md:col-span-5 lg:col-span-5">
         <div class="bg-slate-700 container mx-auto mt-5">
           <div class="bg-gray-800 p-3">
             <h1 class="text-white text-2xl mb-4">Управление Сервером</h1>

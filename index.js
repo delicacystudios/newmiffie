@@ -68,8 +68,32 @@ fs.readdirSync("./commands/").forEach(dir => {
 //////////////////////////////////////////
 
 client.on('messageCreate', async message => {
-  if (message.author.bot) return false;
-  if (message.content.includes("@here") || message.content.includes("@everyone")) return false;
+  let storedSettings = await GuildSettings.findOne({
+    guildID: message.guild.id
+  });
+
+  if (!storedSettings) {
+    const newSettings = new GuildSettings({
+      guildID: message.guild.id
+    });
+
+    try {
+      await newSettings.save()
+    } catch (e) {
+      console.log(e)
+      throw error
+    }
+
+    storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
+  }
+
+  let prefix = config.chat.prefix;
+  if (storedSettings && storedSettings.prefix) {
+    prefix = storedSettings.prefix;
+  } 
+
+  if (message.author.bot) return;
+  if (message.content.includes("@here") || message.content.includes("@everyone")) return;
 
   if (message.mentions.has(client.user.id)) {
     const mention = new MessageEmbed()
@@ -94,7 +118,7 @@ mongoose.connect(config.bot.db, {
       " [DB] Подключено к MongoDB "
     )
   ),
-  
+
   (e) => console.log(
     chalk.redBright.bgBlack(' [DB] Произошла ошибка при подключении к MongoDB ')
   )
@@ -103,7 +127,7 @@ mongoose.connect(config.bot.db, {
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-process.on('unhandledRejection', () => {
+/* process.on('unhandledRejection', () => {
   new Promise((_, reject) => setTimeout(() =>
     reject({
       error: chalk.redBright.bgBlack(' [API] Произошла неизвестная ошибка '),
@@ -112,4 +136,4 @@ process.on('unhandledRejection', () => {
     (data) => console.log(data.data),
     (error) => console.log(error.error)
   )
-});
+}); */

@@ -1,6 +1,3 @@
-/* eslint-disable no-self-assign */
-/* eslint-disable no-inline-comments */
-
 const url = require("url");
 const ejs = require("ejs");
 const path = require("path");
@@ -158,7 +155,7 @@ module.exports = async (client) => {
 
   app.get("/dashboard/:guildID", checkAuth, async (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildID);
-    if (!guild) return res.redirect("/dashboard");
+    if (!guild) return res.redirect("/dashboard/commands");
     let member = guild.members.cache.get(req.user.id);
     if (!member) {
       try {
@@ -219,7 +216,7 @@ module.exports = async (client) => {
     renderTemplate(res, req, "settings.ejs", {
       guild,
       settings: storedSettings,
-      alert: "Your settings have been saved.",
+      alert: "Ваши настройки были сохранены!",
     });
   });
 

@@ -3,7 +3,8 @@ module.exports = {
     token: process.env['TOKEN'],
     id: '944341740243017728',
     db: process.env['MongoDB'],
-    devID: ['528930032823959562']
+    devID: ['528930032823959562'],
+    locale: 'en'
   },
   
   chat: {

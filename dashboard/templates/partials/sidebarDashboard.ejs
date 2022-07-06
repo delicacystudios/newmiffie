@@ -1,24 +1,61 @@
-<div class="h-screen absolute hidden md:static md:block" id="sidebar-collapse" style="width: 270px">
-  <div class="bg-gray-800">
+<div class="hidden md:static md:block h-screen absolute" id="sidebar-collapse">
+  <div class="bg-[#23272A]">
     <aside class="h-screen" aria-label="Sidebar">
-      <div class="overflow-y-auto py-4 px-2 bg-gray-70 rounded dark:bg-gray-800">
-        <ul class="space-y-2">
+      <div class="overflow-y-auto py-4 px-2 bg-gray-70 rounded-lg dark:bg-[#23272A]">
+        <div class="server-card rounded-lg">          
+          <div class="relative rounded-lg overflow-hidden h-44 m-1">
+            <img class="object-cover w-full h-full" src="<%- guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : `https://media.discordapp.net/attachments/984299199967408163/994026105298223206/PicsArt_22-07-05_17-44-42-657.png` %>" loading="lazy">
+            <div class="absolute h-full w-full py-2 bottom-0 inset-x-0 backdrop-blur-lg">
+              <img class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-lg border-2 border-white blur-none" src="<%- guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : `https://media.discordapp.net/attachments/984299199967408163/986522852146679808/logo.png` %>" loading="lazy">
+            </div>
+          </div>
+          <div class="grid grid-cols-3 mt-2 items-center">
+            <div class="col-span-2">
+              <div class="mt-2 mx-2 border-l-3 border-pink-500">
+                  <h5 class="text-white text-base font-medium"><%= guild.name %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
           <li>
-            <a href="/dashboard/<%- guild.id %>" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
               <svg class="flex-shrik-0 nw-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-              <span class="flex-1 ml-3 whitespace-nowrap">Настройка</span>
+              <span class="ml-3"><%= guild.memberCount %> Участников</span>
+            </a>
+              
+            <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <svg class="flex-shrik-0 nw-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+              <span class="ml-3"><%= guild.channels.cache.size %> Каналов</span>
+            </a>
+              
+            <a class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <svg class="flex-shrik-0 nw-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+              <span class="ml-3"><%= guild.roles.cache.size - 1%> Ролей</span>
             </a>
           </li>
         </ul>
         <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
           <li>
+            <a href="/dashboard/<%- guild.id %>" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <svg class="flex-shrik-0 nw-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+              <span class="ml-3">Настройки</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+          <li>
+            <a href="/" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+              <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z" clip-rule="evenodd"></path></svg>
+              <span class="ml-3">Вернуться на главную</span>
+            </a>
             <a href="https://discord.gg/nacafe" target="__blank" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
               <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z" clip-rule="evenodd"></path></svg>
               <span class="ml-3">Сервер Поддержки</span>
             </a>
           </li>
         </ul>
-      </div>
+      </ul>
     </aside>
   </div>
 </div>
