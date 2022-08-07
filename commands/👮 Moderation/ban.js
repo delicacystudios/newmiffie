@@ -7,6 +7,7 @@ module.exports = {
   description: 'Выдать бан пользователю',
   category: "Moderation",
   usage: '[пользователь]',
+  cooldown: 3,
   premium: false,
 
   run: async (client, message, args) => {

@@ -3,16 +3,17 @@
 
 <div align="centre"><img src="https://media.discordapp.net/attachments/984299199967408163/991358811740835901/Screenshot_2022-06-28_09-05-14.png"></div>
 
+## Установка кода
+```
+1: $ git clone https://github.com/delicacystudios/newmiffie.git
+2: $ cd newmiffie
+3: $ bash load.sh
+```
+
 ## Для создания команды
 ```javascript
-const { MessageEmbed } = require('discord.js'); // Не обязательно
-const config = require('путь');
-
-// // Нужно для изменения цвета для премиум-пользователей // //
-const premSchema = require('../../database/premium.js');
-const premuser = await premSchema.findOne({ User: message.author.id });
-const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
-// // // //
+const { MessageEmbed } = require('discord.js'); // Необязательно
+const config = require('../../configs/config.js');
 
 module.exports = {
   name: '', // Название команды
@@ -20,9 +21,16 @@ module.exports = {
   aliases: [''], // Прозвища команд (подкоманды)
   usage: '', // Оставьте пустым, если не требуются аргументы
   category: '', // Категория
+  cooldown: 3,
   premium: false, // true - премиум команда / false - не премиум команда
 
   run: async (client, message, args) {
+    // // Нужно для изменения цвета для премиум-пользователей // //
+    const premSchema = require('../../database/premium.js');
+    const premuser = await premSchema.findOne({ User: message.author.id });
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    // // // //
+  
     // ...
   }
 }

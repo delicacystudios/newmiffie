@@ -7,12 +7,18 @@ module.exports = {
   category: "Utility",
   description: "Очистка чата",  
   usage: "[количество]",
+  cooldown: 3,
   premium: false,
   
   run: async (client, message, args) => {
     // // // // //
     const premSchema = require('../../database/premium.js');
-    const premuser = await premSchema.findOne({ User: message.author.id });
+    const prem = await premSchema.findOne({ User: message.author.id });
+    
+    const pgSchema = require('../../database/pg.js');
+    const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
+    
+    const premuser = prem || guildPrem;
     const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
     // // // // 
     

@@ -8,9 +8,21 @@ module.exports = {
   description: 'Получите ответ на любой вопрос',
   category: "Fun",
   usage: '[вопрос]',
+  cooldown: 3,
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {
+    // // // // //
+    const premSchema = require('../../database/premium.js');
+    const prem = await premSchema.findOne({ User: message.author.id });
+    
+    const pgSchema = require('../../database/pg.js');
+    const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
+    
+    const premuser = prem || guildPrem;
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    // // // //
+    
     let coin = [
       'Орёл', 
       'Решка'
@@ -21,7 +33,7 @@ module.exports = {
     
     let embed = new MessageEmbed()
       .setTitle(`Выпал(-а) ${result}`)
-      .setColor(config.embeds.color)
+      .setColor(color)
     message.reply({ embeds: [embed] })
   }
 }

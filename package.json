@@ -1,6 +1,6 @@
 {
   "name": "miffie",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "description": "Новый и многофункциональный дискорд бот",
   "main": "shards.js",
   "scripts": {
@@ -18,18 +18,20 @@
   },
   "homepage": "https://github.com/delicacystudios/newmiffie#readme",
   "dependencies": {
-    "ascii-table": "^0.0.8",
+    "@discordjs/voice": "^0.11.0",
+    "ascii-table": "^0.0.9",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "chalk": "^4.1.2",
     "cpu-stat": "^2.0.1",
+    "dayjs": "^1.11.3",
     "discord.js": "^13.8.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "figlet": "^1.5.2",
     "fs": "^0.0.1-security",
-    "i18n": "^0.15.0",
+    "i18n": "^0.14.1",
     "memorystore": "^1.6.7",
     "moment": "^2.29.3",
     "moment-duration-format": "^2.3.2",
@@ -41,7 +43,10 @@
     "some-random-cat": "^2.4.0",
     "string-width": "^5.1.2",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "yt-search": "^2.10.3",
+    "ytdl-core": "^4.11.0",
+    "ytsr": "^3.8.0"
   },
   "devDependencies": {
     "node": "^16.13.2"

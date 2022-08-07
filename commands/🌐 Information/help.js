@@ -9,18 +9,25 @@ const funem = emojies.categories.functg;
 const premem = emojies.categories.premctg;
 
 const GuildSettings = require("../../database/settings.js");
+const i18n = require("../../references/i18n.js");
 
 module.exports = {
   name: "help",
-  description: "Команды и возможности бота",
+  description: i18n.__("infoctg.help.description"),
   usage: "",
   category: "Information",
+  cooldown: 3,
   premium: false,
 
   run: async (client, message, args) => {
     // // // // //
     const premSchema = require('../../database/premium.js');
-    const premuser = await premSchema.findOne({ User: message.author.id });
+    const prem = await premSchema.findOne({ User: message.author.id });
+
+    const pgSchema = require('../../database/pg.js');
+    const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
+
+    const premuser = prem || guildPrem;
     const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
     const premstatus = `${premuser ? `Miffie Premium` : `Miffie`}`
     // // // //
@@ -51,7 +58,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const general = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Информация ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.info")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Info)
       .setFooter({ text: `${premstatus}` })
@@ -64,7 +71,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const util = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Утилиты ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.utils")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Util)
       .setFooter({ text: `${premstatus}` })
@@ -77,7 +84,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const fun = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Развлечения ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.fun")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Fun)
       .setFooter({ text: `${premstatus}` })
@@ -87,10 +94,10 @@ module.exports = {
 
     const Mod = message.client.commands.filter(x => x.category == 'Moderation')
       .map((x) =>
-        `<:beta:945072686244167701> \`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
+        `<:beta:1005518061874450433> \`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const mod = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Модерация ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.moderation")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Mod)
       .setFooter({ text: `${premstatus}` })
@@ -101,7 +108,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const premembed = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Модерация ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.premium")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Prem)
       .setFooter({ text: `${premstatus}` })
@@ -109,7 +116,7 @@ module.exports = {
 
     const nopremi = new MessageEmbed()
       .setColor(color)
-      .setDescription(`Извините, но вам нужно иметь премиум, чтобы получить доступ к данной категории!`)
+      .setDescription(`${i18n.__("infoctg.help.introembed.menu.embeds.premerr")}`)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
@@ -117,47 +124,47 @@ module.exports = {
 
     if (!args[0]) {
       const intro = new MessageEmbed()
-        .setAuthor({ name: `♡ Помощь по командам ${premstatus} ♡` })
+        .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.title")} ${premstatus} ♡` })
         .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 4096 }))
         .setColor(color)
-        .setDescription(`Чтобы получить справку по категориям команд бота используйте меню, которое есть под сообщением.
+        .setDescription(`${i18n.__("infoctg.help.introembed.description.main")}
 
-\`< >\` — Необязательные аргументы.
-\`[ ]\` — Обязательные аргументы.`)
+\`< >\` — ${i18n.__("infoctg.help.introembed.description.tip1")}
+\`[ ]\` — ${i18n.__("infoctg.help.introembed.description.tip2")}`)
 
       const helpMenu = new MessageActionRow()
         .addComponents(
           new MessageSelectMenu()
             .setCustomId('help-menu')
-            .setPlaceholder('Выберите категорию')
+            .setPlaceholder(`${i18n.__("infoctg.help.menu.main")}`)
             .addOptions([
               {
-                label: `Информация`,
-                description: 'Главная категория бота',
+                label: `${i18n.__("infoctg.help.menu.options.info.name")}`,
+                description: `${i18n.__("infoctg.help.menu.options.info.description")}`,
                 value: `1`,
                 emoji: `${infoem}`
               },
               {
-                label: `Утилиты`,
-                description: 'Интересные информативные функции',
+                label: `${i18n.__("infoctg.help.menu.options.utils.name")}`,
+                description: `${i18n.__("infoctg.help.menu.options.utils.description")}`,
                 value: `2`,
                 emoji: `${utilem}`
               },
               {
-                label: `Развлечения`,
-                description: 'Весёлые и прикольные команды)',
+                label: `${i18n.__("infoctg.help.menu.options.fun.name")}`,
+                description: `${i18n.__("infoctg.help.menu.options.fun.description")}`,
                 value: `3`,
                 emoji: `${funem}`
               },
               {
-                label: `Модерация`,
-                description: 'Управление и модерирование серверов',
+                label: `${i18n.__("infoctg.help.menu.options.moderation.name")}`,
+                description: `${i18n.__("infoctg.help.menu.options.moderation.description")}`,
                 value: `4`,
                 emoji: `${modem}`
               },
               {
-                label: `Премиум`,
-                description: 'Премиум функции бота',
+                label: `${i18n.__("infoctg.help.menu.options.premium.name")}`,
+                description: `${i18n.__("infoctg.help.menu.options.premium.description")}`,
                 value: `5`,
                 emoji: `${premem}`
               },
@@ -221,7 +228,7 @@ module.exports = {
           .addComponents(
             new MessageSelectMenu()
               .setCustomId('help-menu')
-              .setPlaceholder('Время выбора истекло!')
+              .setPlaceholder(`${i18n.__("infoctg.help.menu.timeout")}`)
               .setDisabled(true)
               .addOptions([
                 {

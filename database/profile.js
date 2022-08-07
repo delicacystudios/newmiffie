@@ -6,21 +6,21 @@ const reqString = {
 }
 
 const profile = new Schema({
-  guildId: {
-    type: reqString
-  }, 
-  userId: {
+  server: { 
     type: reqString
   },
-    
-  xp: {
-    type: Number,
-    default: 0
+  
+  botID: { 
+    type: reqString
   },
-
-  level: {
-    type: Number,
-    default: 1
+  
+  coins: { 
+    type: Number, 
+    default: 0 
+  },
+ 
+  bank: { 
+    type: Number 
   }
 })
 

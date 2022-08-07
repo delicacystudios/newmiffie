@@ -8,4 +8,5 @@ module.exports = {
   },
   
   thanks: '<:thanks:995219074730705018>',
+  infosign: '<:info22:945071907454210188>'
 }

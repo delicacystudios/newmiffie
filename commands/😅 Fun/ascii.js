@@ -8,6 +8,7 @@ module.exports = {
   description: 'Перевести свой текст в ASCII',
   category: "Fun",
   usage: '[текст]',
+  cooldown: 3,
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {

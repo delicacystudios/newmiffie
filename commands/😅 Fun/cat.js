@@ -8,12 +8,18 @@ module.exports = {
   description: 'Получить пикчи с котиками',
   category: "Fun",
   usage: '',
+  cooldown: 3,
   permissions: ["SEND_MESSAGES"],
   
   run: async (client, message, args) => {
     // // // // //
     const premSchema = require('../../database/premium.js');
-    const premuser = await premSchema.findOne({ User: message.author.id });
+    const prem = await premSchema.findOne({ User: message.author.id });
+    
+    const pgSchema = require('../../database/pg.js');
+    const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
+    
+    const premuser = prem || guildPrem;
     const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
     const namefooter = `${premuser ? `👑` : ``}`
     // // // //
