@@ -2,67 +2,144 @@ const config = require('../../configs/config.js');
 const { MessageEmbed } = require('discord.js')
 const schema = require('../../database/settings');
 
+let dev = config.bot.devID;
+
 module.exports = {
   name: "setprefix",
   aliases: ['prefix'],
   description: 'Сменить префикс бота',
   category: "Utility",
   usage: '[аргументы]',
-  permissions: ["ADMINISTRATOR"],
+  cooldown: 3,
+  premium: false,
 
   run: async (client, message, args) => {
-    if (!message.member.permissions.has('MANAGE_MESSAGES')) {
-      const noperms = new MessageEmbed()
-        .setColor(config.embeds.color)
-        .setDescription('У вас недостаточно прав для смены ника!')
-      message.channel.send({ embeds: [noperms] })
-    }
+    // // // // //
+    const premSchema = require('../../database/premium.js');
+    const premuser = await premSchema.findOne({ User: message.author.id });
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const namefooter = `${premuser ? `👑 ${client.user.username} Premium` : `${client.user.username}`} © Все права защищены`
+    // // // //
 
     const data = await schema.findOne({
       guildID: message.guild.id
     });
 
-    if (!args[0]) {
-      const noprefix = new MessageEmbed()
-        .setColor(config.embeds.error)
-        .setDescription('Вам необходимо указать новый префикс!')
-      message.channel.send({ embeds: [noprefix] })
-    } else if (args[0].length > 3) {
-      const size = new MessageEmbed()
-        .setColor(config.embeds.error)
-        .setDescription('Ваш префикс должен содержать не более \`3\` символов!')
-      message.channel.send({ embeds: [size] })
-    } else if (data) {
-      await schema.findOneAndRemove({
-        guildID: message.guild.id
-      })
+    if (message.member.id != config.bot.devID) {
+      if (!message.member.permissions.has('ADMINISTRATOR')) {
+        const noperms = new MessageEmbed()
+          .setColor(config.embeds.error)
+          .setDescription('У вас недостаточно прав для смены префикса!')
+        message.channel.send({ embeds: [noperms] })
+      } else {
+        if (!args[0]) {
+          const noprefix = new MessageEmbed()
+            .setColor(config.embeds.error)
+            .setDescription('Вам необходимо указать новый префикс!')
+          message.channel.send({ embeds: [noprefix] })
+        } else if (args[0].length > 3) {
+          const size = new MessageEmbed()
+            .setColor(config.embeds.error)
+            .setDescription('Ваш префикс должен содержать не более \`3\` символов!')
+          message.channel.send({ embeds: [size] })
 
-      const succ = new MessageEmbed()
-        .setColor(config.embeds.color)
-        .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
-        .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
-        .setFooter({ text: `${client.user.username} © Все права защищены` })
-      message.channel.send({ embeds: [succ] })
+        } else if (data) {
+          await schema.findOneAndRemove({
+            guildID: message.guild.id
+          })
 
-      let newData = new schema({
-        prefix: args[0],
-        guildID: message.guild.id
-      })
+          const succ = new MessageEmbed()
+            .setColor(color)
+            .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
+            .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
+            .setFooter({ text: `${namefooter}` })
+          message.channel.send({ embeds: [succ] })
 
-      newData.save()
-    } else if (!data) {
-      const succ = new MessageEmbed()
-        .setColor(config.embeds.color)
-        .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
-        .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
-        .setFooter({ text: `${client.user.username} © Все права защищены` })
-      message.channel.send({ embeds: [succ] })
+          let newData = new schema({
+            prefix: args[0],
+            guildID: message.guild.id
+          })
 
-      let newData = new schema({
-        prefix: args[0],
-        guildID: message.guild.id
-      })
-      newData.save()
+          newData.save()
+        } else if (!data) {
+          const succ = new MessageEmbed()
+            .setColor(color)
+            .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
+            .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
+            .setFooter({ text: `${namefooter}` })
+          message.channel.send({ embeds: [succ] })
+
+          let newData = new schema({
+            prefix: args[0],
+            guildID: message.guild.id
+          })
+          newData.save()
+        }
+      }
+    }
+
+    if (message.member.id == config.bot.devID) {
+      if (!args[0]) {
+        const noprefix = new MessageEmbed()
+          .setColor(config.embeds.error)
+          .setDescription('Вам необходимо указать новый префикс!')
+        message.channel.send({ embeds: [noprefix] })
+
+      } else if (args[0].length > 3) {
+        const size = new MessageEmbed()
+          .setColor(config.embeds.error)
+          .setDescription('Ваш префикс должен содержать не более \`3\` символов!')
+        message.channel.send({ embeds: [size] })
+
+      } else if (data) {
+        await schema.findOneAndRemove({
+          guildID: message.guild.id
+        })
+
+        const succ = new MessageEmbed()
+          .setColor(color)
+          .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
+          .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
+          .setFooter({ text: `${namefooter}` })
+        message.channel.send({ embeds: [succ] })
+
+        let newData = new schema({
+          prefix: args[0],
+          guildID: message.guild.id
+        })
+
+        newData.save()
+
+        client.users.fetch(message.guild.ownerId).then((user) => {
+          const ownersend = new MessageEmbed()
+            .setColor(color)
+            .setDescription(`Префикс вашего сервера был изменен разработчиком на \`${args[0]}\``)
+          user.send({ embeds: [ownersend] })
+        });
+        const ownersend = new MessageEmbed()
+          .setColor(color)
+          .setDescription(`Префикс вашего сервера был изменен разработчиком на \`${args[0]}\``)
+      } else if (!data) {
+        const succ = new MessageEmbed()
+          .setColor(color)
+          .setThumbnail(message.guild.iconURL({ dynamic: true, size: 512 }))
+          .setDescription(`Префикс [**\` ${args[0]} \`**] был успешно установлен в — **${message.guild.name}**`)
+          .setFooter({ text: `${namefooter}` })
+        message.channel.send({ embeds: [succ] })
+
+        let newData = new schema({
+          prefix: args[0],
+          guildID: message.guild.id
+        })
+        newData.save()
+
+        client.users.fetch(message.guild.ownerId).then((user) => {
+          const ownersend = new MessageEmbed()
+            .setColor(color)
+            .setDescription(`Префикс вашего сервера был изменен разработчиком на \`${args[0]}\``)
+          user.send({ embeds: [ownersend] })
+        });
+      }
     }
   }
 }

@@ -11,4 +11,4 @@ shards.on('shardCreate', shard => {
   console.log(chalk.blueBright.bgBlack(` [Shards]: Шард ${shard.id + 1} был запущен `))
 });
 
-shards.spawn();
+shards.spawn()

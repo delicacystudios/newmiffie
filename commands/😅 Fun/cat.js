@@ -11,6 +11,13 @@ module.exports = {
   permissions: ["SEND_MESSAGES"],
   
   run: async (client, message, args) => {
+    // // // // //
+    const premSchema = require('../../database/premium.js');
+    const premuser = await premSchema.findOne({ User: message.author.id });
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const namefooter = `${premuser ? `👑` : ``}`
+    // // // //
+    
     axios({
       method: 'get',
       url: 'https://api.thecatapi.com/v1/images/search',
@@ -20,8 +27,8 @@ module.exports = {
     }).then(res => {
       const embed = new MessageEmbed()
         .setImage(res.data[0].url)
-        .setColor(config.embeds.color)
-        .setFooter({ text: `Запросил(-а) ${message.author.tag}` })
+        .setColor(color)
+        .setFooter({ text: `${namefooter} ${message.author.tag}` })
         .setTimestamp()
       message.reply({ embeds: [embed] })
 

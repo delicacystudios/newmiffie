@@ -5,9 +5,13 @@
     <title> <%= title %> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" class="absolute w-24 h-24 bottom-[22%] inset-x-0 mx-auto rounded-lg border-2 border-white blur-none" href="<%- guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : `https://media.discordapp.net/attachments/984299199967408163/986522852146679808/logo.png` %>" loading="lazy" type="image/png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script> 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-[#2C2F33] scroll-smooth">
-</body>
+  <div class="inline md:hidden z-20 top-0 sticky w-full flex justify-end">
+    <button class="mr-5 mt-5 border border-solid border-white px-3 py-1 rounded text-white opacity-50 hover:opacity-75 md:hidden" id="sidebar-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>

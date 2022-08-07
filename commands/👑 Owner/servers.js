@@ -7,6 +7,7 @@ module.exports = {
   description: "Показать все сервера",
   category: 'Owner',
   usage: "",
+  premium: false,
 
   run: async (client, message) => {
     if (message.author.id == ownerid) {
@@ -25,13 +26,13 @@ module.exports = {
           .join("\n\n")
 
       let embed = new MessageEmbed()
-        .setAuthor({ name: `Список серверов Miffie`})
+        .setAuthor({ name: `Список серверов Miffie` })
         .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 512 }))
         .setColor(`#a94dff`)
         .setFooter({ text: `Страница - ${page}/${Math.ceil(client.guilds.cache.size / 10)}` })
         .setDescription(description)
 
-      let msg = await message.channel.send({ embeds: [embed]})
+      let msg = await message.channel.send({ embeds: [embed] })
 
       await msg.react("⬅");
       await msg.react("➡");
@@ -51,7 +52,7 @@ module.exports = {
             console.log(i0)
             return msg.delete()
           }
-          
+
           if (!i0 || !i1) {
             return msg.delete()
           }
@@ -69,7 +70,7 @@ module.exports = {
           embed
             .setFooter({ text: `Страница - ${page}/${Math.round(client.guilds.cache.size / 10 + 1)}` })
             .setDescription(description)
-          msg.edit({ embeds: [embed]})
+          msg.edit({ embeds: [embed] })
         }
 
         if (reaction._emoji.name === "➡") {
@@ -80,7 +81,7 @@ module.exports = {
           if (i1 > client.guilds.cache.size + 10) {
             return msg.delete();
           }
-          
+
           if (!i0 || !i1) {
             return msg.delete();
           }
@@ -104,7 +105,7 @@ module.exports = {
         if (reaction._emoji.name === "❌") {
           return msg.delete();
         }
-        
+
         await reaction.users.remove(message.author.id);
       })
     } else {

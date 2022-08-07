@@ -14,4 +14,4 @@ const guildSettingSchema = new Schema({
   }
 })
 
-module.exports = model("guild_settings", guildSettingSchema);
+module.exports = model("Guild Settings", guildSettingSchema);

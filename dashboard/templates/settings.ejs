@@ -3,12 +3,12 @@
 <div class="min-h-screen w-full">
   <div id="content">
     <div class="grid grid-cols-7">
-      <div class="hidden md:block sm:col-span-1 md:col-span-2 lg:col-span-1">
+      <div class="absolute hidden md:static md:block sm:col-span-1 md:col-span-2 lg:col-span-1" id="sidebar-collapse">
         <%- include("partials/sidebarDashboard", { bot, user, path, guild }) %>
       </div>
         
       <div class="col-span-7 xl:justify-self-left w-full md:col-span-5 xl:col-span-5 mt-5">
-        <div class="bg-[#2C2F33] container md:ml-10 w-full w-full md:w-11/12 xl:w-10/12">
+        <div class="bg-[#2C2F33] container md:ml-10 w-full md:w-11/12 xl:w-10/12">
           <h1 class="ml-2 text-white text-2xl mb-3 font-medium">Настройки</h1>
 
           <% if (alert) { %>
@@ -76,3 +76,5 @@
     </div>
   </div>
 </div>
+
+<%- include("partials/footer") %>

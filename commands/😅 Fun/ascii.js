@@ -18,17 +18,14 @@ module.exports = {
           .setDescription("Вам нужно ввести сообщение, для того, чтобы получить ascii версию!")
         message.channel.send({ embeds: [errorem] })
         
-      } else if (args.join(" ").length > 8) {
+      } else if (args.join(" ").length > 10) {
         const moret = new MessageEmbed()
           .setColor(config.embeds.error)
           .setDescription('Ваше сообщение не должно привышать 8 символов!')
         message.channel.send({ embeds: [moret] })
         
       } else if (args.join(" ")) {
-        const embed = new MessageEmbed()
-          .setColor(config.embeds.color)
-          .setDescription(`\`\`\`${text.trimRight()}\`\`\``)
-        message.channel.send({ embeds: [embed] })
+        message.channel.send({ content: `\`\`\`\`\`\`${text.trimRight()}\`\`\`\`\`\`` })
       }
     })
   }

@@ -7,6 +7,7 @@ module.exports = {
   description: 'Кикнуть пользователя',
   category: "Moderation",
   usage: '[пользователь]',
+  premium: false,
 
   run: async (client, message, args) => {
     let user = message.mentions.members.first()
@@ -66,7 +67,7 @@ module.exports = {
 
     } else if (user) {
       const use = new MessageEmbed()
-        .setColor('#a94dff')
+        .setColor(color)
         .setTitle(`Вы были кикнуты из ${message.guild.name}`)
         .addFields(
           {

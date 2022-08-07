@@ -11,6 +11,12 @@ module.exports = {
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {
+    // // // // //
+    const premSchema = require('../../database/premium.js');
+    const premuser = await premSchema.findOne({ User: message.author.id });
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} © Все права защищены`
+    // // // //
 
     let answers = [
       'Я вижу это в позитивном настроении', 
@@ -38,8 +44,9 @@ module.exports = {
     let response = random.int(0, answers.length - 1)
     let embed = new MessageEmbed()
       .setTitle('8Ball ответчает:')
-      .setColor(config.embeds.color)
+      .setColor(color)
       .setDescription(answers[response])
+      .setFooter({ text: `${namefooter}` })
     message.reply({ embeds: [embed] })
   }
 }

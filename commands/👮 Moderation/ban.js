@@ -7,6 +7,7 @@ module.exports = {
   description: 'Выдать бан пользователю',
   category: "Moderation",
   usage: '[пользователь]',
+  premium: false,
 
   run: async (client, message, args) => {
     let user = message.mentions.members.first()

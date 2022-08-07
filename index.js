@@ -19,15 +19,26 @@ const client = new Client({
 });
 
 const config = require('./configs/config.js');
-const fs = require('fs');
-const ascii = require('ascii-table');
 
 const mongoose = require("mongoose");
 const GuildSettings = require("./database/settings.js");
 const chalk = require('chalk');
 
+const fs = require('fs');
+const ascii = require('ascii-table');
+
 //////////////////////////////////////////
 //////////////////////////////////////////
+
+// -------------- //
+const path = require("path");
+const { I18n } = require('i18n');
+
+const i18n = new I18n({
+  locales: ['ru', 'en'],
+  directory: path.join(__dirname, '.', 'locales')
+})
+// ---------------- //
 
 fs.readdir("./events/", (err, files) => {
   if (err) console.log(err)
@@ -35,16 +46,18 @@ fs.readdir("./events/", (err, files) => {
 
   JSevents.forEach(file => {
     let eventN = file.split(".")[0]
-    let event = require(`./events/${eventN}`)
+    let event = require(`./events/${eventN}`)  
     client.on(eventN, event.bind(null, client))
   })
 });
 
 //////////////////////////////////////////
+
 //////////////////////////////////////////
 
 client.commands = new Collection();
 client.aliases = new Collection();
+client.voiceGenerator = new Collection();
 
 let table = new ascii("Commands");
 table.setHeading("Command", "Load status");
@@ -67,10 +80,10 @@ fs.readdirSync("./commands/").forEach(dir => {
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-client.on('messageCreate', async message => {
+client.on('messageCreate', async (message) => {
   let storedSettings = await GuildSettings.findOne({
     guildID: message.guild.id
-  });
+  })
 
   if (!storedSettings) {
     const newSettings = new GuildSettings({
@@ -90,50 +103,38 @@ client.on('messageCreate', async message => {
   let prefix = config.chat.prefix;
   if (storedSettings && storedSettings.prefix) {
     prefix = storedSettings.prefix;
-  } 
+  }
 
   if (message.author.bot) return;
   if (message.content.includes("@here") || message.content.includes("@everyone")) return;
+  // // // // //
+  const premSchema = require('./database/premium.js');
+  const premuser = await premSchema.findOne({ User: message.author.id });
+  const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+  const premstatus = `${premuser ? `Miffie Premium` : `Miffie`}`
+  // // // //
 
   if (message.mentions.has(client.user.id)) {
     const mention = new MessageEmbed()
       .setTitle(`Мой префикс — \`${prefix}\``)
       .setDescription(`Если вам нужна помощь по командам бота, напишите \`${prefix}help\``)
-      .setFooter({ text: "Miffie ©️ Все права защищены." })
-      .setColor(config.embeds.color)
+      .setFooter({ text: `${premstatus} ©️ Все права защищены.` })
+      .setColor(color)
     return message.reply({ embeds: [mention] })
   }
 })
 
 //////////////////////////////////////////
-//////////////////////////////////////////
 
 client.login(config.bot.token)
-mongoose.connect(config.bot.db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(
-  () => console.log(
-    chalk.greenBright.bgBlack(
-      " [DB] Подключено к MongoDB "
-    )
-  ),
-
-  (e) => console.log(
-    chalk.redBright.bgBlack(' [DB] Произошла ошибка при подключении к MongoDB ')
-  )
-)
 
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-/* process.on('unhandledRejection', () => {
-  new Promise((_, reject) => setTimeout(() =>
+process.on('unhandledRejection', () => {
+  new Promise(async (_, reject) => setTimeout(() =>
     reject({
       error: chalk.redBright.bgBlack(' [API] Произошла неизвестная ошибка '),
     }), 1000)
-  ).then(
-    (data) => console.log(data.data),
-    (error) => console.log(error.error)
-  )
-}); */
+  ).catch((e) => console.log('ошибка с ошибкой ))'))
+});

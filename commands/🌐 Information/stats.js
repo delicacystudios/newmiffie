@@ -6,12 +6,18 @@ const config = require('../../configs/config.js');
 
 module.exports = {
   name: 'stats',
-  descritpion: 'Активный статус бота',
+  description: 'Статистика',
   category: 'Information',
   aliases: ['ping', 'statistics', 'bot'],
   usage: "",
+  premium: false,
 
   run: async (client, message, args) => {
+    const premSchema = require('../../database/premium.js');
+    const premuser = await premSchema.findOne({ User: message.author.id });
+    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} © Все права защищены`
+    
     if (!args[0]) {
       const { version } = require("discord.js");
       cpuStat.usagePercent(async function(err, percent, seconds) {
@@ -23,7 +29,7 @@ module.exports = {
           .format(" D[d], H[h], m[m]");
 
         const embed = new MessageEmbed()
-          .setColor(config.embeds.color)
+          .setColor(color)
           .setTitle(`Статистика`)
           .addFields(
             {
@@ -75,6 +81,7 @@ module.exports = {
               inline: true,
             }
           )
+          .setFooter({ text: `${namefooter}` })
         message.channel.send({ embeds: [embed] })
           .then((message) => {
             setInterval(function() {
@@ -88,7 +95,7 @@ module.exports = {
                   .format(" D[d], H[h], m[m]");
 
                 const embed = new MessageEmbed()
-                  .setColor(config.embeds.color)
+                  .setColor(color)
                   .setTitle(`Статистика`)
                   .addFields(
                     {
@@ -140,6 +147,7 @@ module.exports = {
                       inline: true,
                     }
                   )
+                  .setFooter({ text: `${namefooter}` })
                 message.edit({ embeds: [embed] })
               })
             }, 500)
