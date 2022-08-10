@@ -23,27 +23,6 @@ const guildSettingSchema = new Schema({
   language: {
     type: String,
     default: 'en'
-  },
-
-  addons: {
-    type: Object,
-    default: {
-      welcome: {
-        enabled: false,
-        channel: null,
-        message: null,
-        image: false,
-        embed: false
-      },
-      
-      goodbye: {
-        enabled: false,
-        channel: null,
-        message: null,
-        image: false,
-        embed: false
-      }
-    }
   }
 })
 

@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require("../../configs/config.js");
 
 module.exports = {
   name: "menu",
@@ -10,7 +9,7 @@ module.exports = {
   premium: false,
 
   run: async (client, message, args) => {
-    if (message.author.id === config.bot.devID) {
+    if (message.author.id === client.config.bot.devID) {
       const GuildSettings = require("../../database/settings.js");
       let storedSettings = await GuildSettings.findOne({
         guildID: message.guild.id,
@@ -26,7 +25,7 @@ module.exports = {
         storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
       };
 
-      let prefix = config.chat.prefix;
+      let prefix = client.config.chat.prefix;
       if (storedSettings && storedSettings.prefix) {
         prefix = storedSettings.prefix;
       }
@@ -35,11 +34,11 @@ module.exports = {
         .map((x) =>
           `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
-      const developer = config.bot.devID;
+      const developer = client.config.bot.devID;
 
       const general = new MessageEmbed()
         .setAuthor({ name: `♡ Меню Разработчика ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
-        .setColor(config.embeds.developer)
+        .setColor(client.config.embeds.developer)
         .setDescription(Info)
         .setFooter({ text: `ID: ${developer}` })
         .setTimestamp()
@@ -47,7 +46,7 @@ module.exports = {
 
     } else {
       const gen = new MessageEmbed()
-        .setColor(config.embeds.error)
+        .setColor(client.config.embeds.error)
         .setDescription(`Извините, вы не можете получить доступ к данной команде, потому-что вы не являетесь разработчиком бота!`)
         .setTimestamp()
       message.channel.send({ embeds: [gen] })

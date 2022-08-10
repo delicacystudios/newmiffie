@@ -2,7 +2,6 @@ const { MessageEmbed } = require('discord.js');
 const mmnt = require("moment-duration-format");
 const cpuStat = require("cpu-stat");
 const moment = require("moment");
-const config = require('../../configs/config.js');
 
 module.exports = {
   name: 'stats',
@@ -21,7 +20,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} © Все права защищены`
     
     if (!args[0]) {

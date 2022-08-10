@@ -18,16 +18,18 @@ const client = new Client({
   ]
 });
 
-const config = require('./configs/config.js');
-
-const mongoose = require("mongoose");
+//const config = require('./configs/config.js');
+//const emojies = require('./configs/emoji.js');
 const GuildSettings = require("./database/settings.js");
 const chalk = require('chalk');
 
 const fs = require('fs');
-const ascii = require('ascii-table');
 
 //////////////////////////////////////////
+
+client.queue = new Map()
+const { Player } = require('discord-player');
+
 //////////////////////////////////////////
 
 // -------------- //
@@ -38,29 +40,16 @@ const i18n = new I18n({
   locales: ['ru', 'en'],
   directory: path.join(__dirname, '.', 'locales')
 })
-// ---------------- //
-
-fs.readdir("./events/", (err, files) => {
-  if (err) console.log(err)
-  let JSevents = files.filter(t => t.split(".").pop() === "js")
-
-  JSevents.forEach(file => {
-    let eventN = file.split(".")[0]
-    let event = require(`./events/${eventN}`)  
-    client.on(eventN, event.bind(null, client))
-  })
-});
-
-//////////////////////////////////////////
+// -------------- //
 
 //////////////////////////////////////////
 
 client.commands = new Collection();
 client.aliases = new Collection();
-client.voiceGenerator = new Collection();
+client.config = require('./configs/config.js');
+client.emotes = require('./configs/emoji.js');
 
-let table = new ascii("Commands");
-table.setHeading("Command", "Load status");
+//////////////////////////////////////////
 
 fs.readdirSync("./commands/").forEach(dir => {
   const commands = fs.readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
@@ -68,12 +57,19 @@ fs.readdirSync("./commands/").forEach(dir => {
     let pull = require(`./commands/${dir}/${file}`);
     if (pull.name) {
       client.commands.set(pull.name, pull);
-      table.addRow(file, '✅');
     } else {
-      table.addRow(file, `❌  -> missing a help.name, or help.name is not a string.`);
+      console.log(`❌: ${file}`)
       continue;
     }
     if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
+  }
+})
+
+fs.readdirSync('./events/').forEach(dirs => {
+  const events = fs.readdirSync(`./events/${dirs}`).filter(files => files.endsWith('.js'))
+  for (const file of events) {
+    const event = require(`./events/${dirs}/${file}`)
+    client.on(file.split(".")[0], event.bind(null, client))
   }
 })
 
@@ -100,21 +96,23 @@ client.on('messageCreate', async (message) => {
     storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
   }
 
-  let prefix = config.chat.prefix;
+  let prefix = client.config.chat.prefix;
   if (storedSettings && storedSettings.prefix) {
     prefix = storedSettings.prefix;
   }
+
+  client.prefix = prefix;
 
   if (message.author.bot) return;
   if (message.content.includes("@here") || message.content.includes("@everyone")) return;
   // // // // //
   const premSchema = require('./database/premium.js');
   const premuser = await premSchema.findOne({ User: message.author.id });
-  const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+  const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
   const premstatus = `${premuser ? `Miffie Premium` : `Miffie`}`
   // // // //
 
-  if (message.mentions.has(client.user.id)) {
+  if (message.mentions.has(client.user.id) && !message.mentions.has(client.user.id) === message.content) {
     const mention = new MessageEmbed()
       .setTitle(`Мой префикс — \`${prefix}\``)
       .setDescription(`Если вам нужна помощь по командам бота, напишите \`${prefix}help\``)
@@ -126,15 +124,11 @@ client.on('messageCreate', async (message) => {
 
 //////////////////////////////////////////
 
-client.login(config.bot.token)
+client.login(client.config.bot.token)
 
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-process.on('unhandledRejection', () => {
-  new Promise(async (_, reject) => setTimeout(() =>
-    reject({
-      error: chalk.redBright.bgBlack(' [API] Произошла неизвестная ошибка '),
-    }), 1000)
-  ).catch((e) => console.log('ошибка с ошибкой ))'))
+process.on('unhandledRejection', (e) => {
+  console.log(chalk.redBright.bgBlack('[API] Произошла неизвестная ошибка'), e)
 });

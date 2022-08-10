@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require("../../configs/config.js");
 const pgSchema = require('../../database/pg.js');
 const day = require('dayjs');
 
@@ -11,16 +10,16 @@ module.exports = {
   aliases: ['apg'],
 
   run: async (client, message, args) => {
-    if (message.author.id == config.bot.devID) {
+    if (message.author.id == client.config.bot.devID) {
       if (!args[0]) {
         const errargs = new MessageEmbed()
-          .setColor(config.embeds.developer)
+          .setColor(client.config.embeds.developer)
           .setDescription(`Пожауйста, укажите ID сервера, которому вы бы хотели выдать премиум`)
         message.channel.send({ embeds: [errargs] })
         
       } else if (!client.guilds.cache.has(args[0])) {
         const errnull = new MessageEmbed()
-          .setColor(config.embeds.developer)
+          .setColor(client.config.embeds.developer)
           .setDescription(`Бот не находится на данном сервере!`)
         message.channel.send({ embeds: [errnull] })
         
@@ -44,7 +43,7 @@ module.exports = {
             }).save();
 
             const succ = new MessageEmbed()
-              .setColor(config.embeds.developer)
+              .setColor(client.config.embeds.developer)
               .setDescription('Настройки были сохранены!')
             message.channel.send({ embeds: [succ] })
           }

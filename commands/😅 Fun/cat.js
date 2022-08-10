@@ -1,6 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const config = require('../../configs/config.js');
 
 module.exports = {
   name: "cat",
@@ -20,7 +19,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const namefooter = `${premuser ? `👑` : ``}`
     // // // //
     
@@ -28,7 +27,7 @@ module.exports = {
       method: 'get',
       url: 'https://api.thecatapi.com/v1/images/search',
       headers: {
-        'api-key': `${config.keys.CatKey}`
+        'api-key': `${client.config.keys.CatKey}`
       }
     }).then(res => {
       const embed = new MessageEmbed()

@@ -1,8 +1,5 @@
-const config = require('../../configs/config.js');
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require('discord.js');
 const schema = require('../../database/settings');
-
-let dev = config.bot.devID;
 
 module.exports = {
   name: "setprefix",
@@ -22,7 +19,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const namefooter = `${premuser ? `👑 ${client.user.username} Premium` : `${client.user.username}`} © Все права защищены`
     // // // //
 
@@ -30,16 +27,16 @@ module.exports = {
       guildID: message.guild.id
     });
 
-    if (message.member.id != config.bot.devID) {
+    if (message.member.id != client.config.bot.devID) {
       if (!message.member.permissions.has('ADMINISTRATOR')) {
         const noperms = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription('У вас недостаточно прав для смены префикса!')
         message.channel.send({ embeds: [noperms] })
       } else {
         if (!args[0]) {
           const noprefix = new MessageEmbed()
-            .setColor(config.embeds.error)
+            .setColor(client.config.embeds.error)
             .setDescription('Вам необходимо указать новый префикс!')
           message.channel.send({ embeds: [noprefix] })
         } else if (args[0].length > 3) {
@@ -83,16 +80,16 @@ module.exports = {
       }
     }
 
-    if (message.member.id == config.bot.devID) {
+    if (message.member.id == client.config.bot.devID) {
       if (!args[0]) {
         const noprefix = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription('Вам необходимо указать новый префикс!')
         message.channel.send({ embeds: [noprefix] })
 
       } else if (args[0].length > 3) {
         const size = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription('Ваш префикс должен содержать не более \`3\` символов!')
         message.channel.send({ embeds: [size] })
 

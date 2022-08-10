@@ -1,6 +1,5 @@
 const { MessageEmbed } = require ('discord.js');
 const figlet = require ("figlet");
-const config = require('../../configs/config.js')
 
 module.exports = {
   name: "ascii",
@@ -15,13 +14,13 @@ module.exports = {
     figlet.text(args.join(" "), (err, text) => {
       if (!args.join(" ")) {
         const errorem = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription("Вам нужно ввести сообщение, для того, чтобы получить ascii версию!")
         message.channel.send({ embeds: [errorem] })
         
       } else if (args.join(" ").length > 10) {
         const moret = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription('Ваше сообщение не должно привышать 8 символов!')
         message.channel.send({ embeds: [moret] })
         

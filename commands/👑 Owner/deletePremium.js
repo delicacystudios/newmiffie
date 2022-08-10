@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require("../../configs/config.js");
 const premSchema = require("../../database/premium.js");
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
   premium: false,
   
   run: async (client, message, args) => {
-    if (message.author.id == config.bot.devID) {
+    if (message.author.id == client.config.bot.devID) {
       const member = 
         message.mentions.members.first() || 
         client.users.cache.get(args[0])
@@ -21,14 +20,14 @@ module.exports = {
       }, async(err, data) => {
         if (!data) {
           const nodata = new MessageEmbed()
-            .setColor(config.embeds.error)
+            .setColor(client.config.embeds.error)
             .setDescription(`${member} не имеет премиума!`)
           message.channel.send({ embeds: [nodata] })
         } else if (data) {
           data.delete();
 
           const dataembed = new MessageEmbed()
-            .setColor(config.embeds.developer)
+            .setColor(client.config.embeds.developer)
             .setDescription(`Был удалён премиум - ${member}`)
           message.channel.send({ embeds: [dataembed] })
         }
@@ -36,7 +35,7 @@ module.exports = {
 
       if (!member) {
         const nomember = new MessageEmbed()
-          .setColor(config.embeds.error)
+          .setColor(client.config.embeds.error)
           .setDescription('Пользователь не найден!')
         message.channel.send({ embeds: [nomember] })
       }

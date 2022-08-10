@@ -1,5 +1,4 @@
 const { MessageEmbed, Permissions } = require('discord.js');
-const config = require('../../configs/config.js')
 
 module.exports = {
   name: 'clear',
@@ -19,7 +18,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     // // // // 
     
     if (message.deletable) {
@@ -36,20 +35,20 @@ module.exports = {
       return message.channel.send({ content: "Укажите количество сообщений которое хотите удалить" });
 
     const noperms2 = new MessageEmbed()
-      .setColor(config.embeds.error)
+      .setColor(client.config.embeds.error)
       .setDescription(`У вас недостаточно прав!`)
     if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) 
       return message.channel.send({ embeds: [noperms2] }) 
 
     const count = new MessageEmbed()
-      .setColor(config.embeds.error)
+      .setColor(client.config.embeds.error)
       .setDescription(`Сообщение не содержит числа!`)
     if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
       return message.channel.send({embeds: [count]})
     }
 
     let embed = new MessageEmbed()
-      .setColor(config.embeds.error)
+      .setColor(client.config.embeds.error)
       .setDescription(`Ваше число превышает лимит в 100 сообщений`)
     if(args[0] > 100) 
       return message.channel.send({ embeds: [embed] }) 

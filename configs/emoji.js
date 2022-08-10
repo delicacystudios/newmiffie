@@ -8,5 +8,6 @@ module.exports = {
   },
   
   thanks: '<:thanks:995219074730705018>',
-  infosign: '<:info22:945071907454210188>'
+  infosign: '<:info22:945071907454210188>',
+  betasign: '<:beta:1005518061874450433>'
 }

@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../configs/config.js');
 const premSchema = require("../../database/premium.js");
 
 module.exports = {
@@ -20,7 +19,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const namefooter = `${premuser ? `👑 ${client.user.username} Premium` : `${client.user.username}`} © Все права защищены`
     // // // //
 

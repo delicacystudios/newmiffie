@@ -1,13 +1,4 @@
 const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
-const config = require('../../configs/config.js');
-const emojies = require('../../configs/emoji.js');
-
-const infoem = emojies.categories.infoctg;
-const utilem = emojies.categories.utilctg;
-const modem = emojies.categories.modctg;
-const funem = emojies.categories.functg;
-const premem = emojies.categories.premctg;
-
 const GuildSettings = require("../../database/settings.js");
 const i18n = require("../../references/i18n.js");
 
@@ -28,8 +19,16 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
 
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const premstatus = `${premuser ? `Miffie Premium` : `Miffie`}`
+    const image = `${premuser ? 'https://media.discordapp.net/attachments/984299199967408163/1006991519594594374/PicsArt_22-08-10_00-48-04-236.png' : 'https://media.discordapp.net/attachments/984299199967408163/1006991520810946570/PicsArt_22-08-10_00-25-57-847.png'}`
+
+    const infoem = client.emotes.categories.infoctg;
+    const utilem = client.emotes.categories.utilctg;
+    const beta = client.emotes.betasign;
+    const modem = client.emotes.categories.modctg;
+    const funem = client.emotes.categories.functg;
+    const premem = client.emotes.categories.premctg;
     // // // //
 
     let storedSettings = await GuildSettings.findOne({
@@ -46,7 +45,7 @@ module.exports = {
       storedSettings = await GuildSettings.findOne({ guildID: message.guild.id });
     };
 
-    let prefix = config.chat.prefix;
+    let prefix = client.config.chat.prefix;
     if (storedSettings && storedSettings.prefix) {
       prefix = storedSettings.prefix;
     }
@@ -62,6 +61,7 @@ module.exports = {
       .setColor(color)
       .setDescription(Info)
       .setFooter({ text: `${premstatus}` })
+      .setImage(image)
       .setTimestamp()
 
     ///// ///// ///// ///// /////
@@ -74,6 +74,7 @@ module.exports = {
       .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.utils")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Util)
+      .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
@@ -87,19 +88,28 @@ module.exports = {
       .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.fun")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Fun)
+      .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
     ///// ///// ///// ///// /////
 
-    const Mod = message.client.commands.filter(x => x.category == 'Moderation')
-      .map((x) =>
-        `<:beta:1005518061874450433> \`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
-
     const mod = new MessageEmbed()
-      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.moderation")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ Категория: Аддоны ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
-      .setDescription(Mod)
+      .addFields(
+        {
+          name: `Авто-Роли ${beta}`,
+          value: `\`${prefix}enable-autorole [роль]\` — Включить автороль
+                  \`${prefix}disable-autorole [роль]\` — Выключить автороль`
+        },
+        {
+          name: `Команды ${beta}`,
+          value: `\`${prefix}enable-command [команда]\` — Включить команду
+                  \`${prefix}disable-command [команда]\` — Выключить команду`
+        }
+      )
+      .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
@@ -111,12 +121,14 @@ module.exports = {
       .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.premium")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Prem)
+      .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
     const nopremi = new MessageEmbed()
       .setColor(color)
       .setDescription(`${i18n.__("infoctg.help.introembed.menu.embeds.premerr")}`)
+      .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
 
@@ -125,12 +137,12 @@ module.exports = {
     if (!args[0]) {
       const intro = new MessageEmbed()
         .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.title")} ${premstatus} ♡` })
-        .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 4096 }))
         .setColor(color)
         .setDescription(`${i18n.__("infoctg.help.introembed.description.main")}
 
 \`< >\` — ${i18n.__("infoctg.help.introembed.description.tip1")}
 \`[ ]\` — ${i18n.__("infoctg.help.introembed.description.tip2")}`)
+        .setImage(image)
 
       const helpMenu = new MessageActionRow()
         .addComponents(
@@ -157,8 +169,8 @@ module.exports = {
                 emoji: `${funem}`
               },
               {
-                label: `${i18n.__("infoctg.help.menu.options.moderation.name")}`,
-                description: `${i18n.__("infoctg.help.menu.options.moderation.description")}`,
+                label: `Аддоны`,
+                description: `Помогает управлять сервером`,
                 value: `4`,
                 emoji: `${modem}`
               },

@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../configs/config.js');
 
 module.exports = {
   name: 'server',
@@ -33,7 +32,7 @@ module.exports = {
       storedSettings = await GuildSettings.findOne({ guildID: message.guild.id })
     }
 
-    let prefix = config.chat.prefix;
+    let prefix = client.config.chat.prefix;
     if (storedSettings && storedSettings.prefix) {
       prefix = storedSettings.prefix;
     }
@@ -46,7 +45,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     // // // //   
     
     //-- Code --//

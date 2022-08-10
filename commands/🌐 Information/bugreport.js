@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js')
-const config = require('../../configs/config.js')
 const lang = require("../../references/lang.js");
 
 module.exports = {
@@ -26,14 +25,14 @@ module.exports = {
     const locale = lang.getLocale(settt.language)
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} ${locale.infoctg.bugreport.footer}`
     const premstatus = `${premuser ? `Miffie Premium` : `Miffie`}`
     // // // //
 
     if (!args[0]) {
       const emmma = new MessageEmbed()
-        .setColor(config.embeds.error)
+        .setColor(client.config.embeds.error)
         .setDescription(`${locale.infoctg.bugreport.embeds.err}`)
       message.channel.send({ embeds: [emmma] })
     } else if (args[0]) {

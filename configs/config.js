@@ -23,15 +23,7 @@ module.exports = {
     CatKey: process.env['CatKey']
   },
   
-  Lavalink: {
-    id: "Main",
-    host: "lava.link",
-    port: 80,
-    pass: "youshallnotpass",
-    secure: false
-  },
-
-  opt: {
+  player: {
     maxVol: 100,
     loopMessage: false,
     discordPlayer: {

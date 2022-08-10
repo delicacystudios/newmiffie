@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../configs/config.js');
 
 module.exports = {
   name: 'avatar',
@@ -19,7 +18,7 @@ module.exports = {
     const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
     
     const premuser = prem || guildPrem;
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
+    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
     // // // // 
     
     const member = message.mentions.members.first()
