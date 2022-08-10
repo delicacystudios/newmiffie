@@ -7,4 +7,4 @@ echo |     Бот запускается     |
 echo ---------------------------
 echo    Автор кода - NateAles
 echo     https://natedev.tk
-node index.js
+node shards.js
