@@ -1,9 +1,10 @@
 const config = require('../../configs/config.js');
 const { MessageEmbed, Permissions, Collection } = require('discord.js')
 const cooldowns = new Collection();
+
 const profileModel = require("../../database/profile");
 const GuildSettings = require("../../database/settings.js");
-const BlackListSchema = require('../../database/blacklist.js')
+const BlackListSchema = require('../../database/blacklist.js');
 const commandsSchema = require('../../database/commands.js');
 
 
@@ -59,13 +60,13 @@ module.exports = async (client, message) => {
 
   let profileData;
   try {
-    profileData = await profileModel.findOne({ serverID: message.guild.id });
+    profileData = await profileModel.findOne({ UserID: message.author.id });
     if (!profileData) {
       let profile = await profileModel.create({
-        serverID: message.guild.id,
-        botID: client.user.id,
-        coins: 10,
-        bank: 0
+        UserID: message.author.id,
+        GuildID: message.guild.id,
+        MiCoins: 1000,
+        Bank: 0
       })
 
       profile.save()
@@ -147,7 +148,7 @@ module.exports = async (client, message) => {
           } else {
             timestamps.set(message.author.id, nowtime);
             setTimeout(
-              () => timestamps.delete(message.author.id), cooldown, cmd.run(client, message, args)
+              () => timestamps.delete(message.author.id), cooldown, cmd.run(client, message, args, profileData)
             )
           }
         } else if (premuser) {
@@ -160,10 +161,10 @@ module.exports = async (client, message) => {
                   .setDescription('Данная команда была отключена администратором сервера!')
                 message.channel.send({ embeds: [mom] })
               } else {
-                cmd.run(client, message, args)
+                cmd.run(client, message, args, profileData)
               }
             } else {
-              cmd.run(client, message, args)
+              cmd.run(client, message, args, profileData)
             }
           } catch (err) {
             const occurederror = new MessageEmbed()

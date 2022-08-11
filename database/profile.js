@@ -3,15 +3,20 @@ const { Schema, model } = require("mongoose");
 const profile = new Schema({
   UserID: { 
     type: String,
+    Unique: true
+  },
+
+  GuildID: {
+    type: String
   },
   
-  coins: { 
+  MiCoins: { 
     type: Number, 
-    default: 0 
+    default: 1000
   },
  
-  bank: { 
-    type: Number 
+  Bank: { 
+    type: Number
   }
 })
 

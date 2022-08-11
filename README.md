@@ -1,7 +1,5 @@
-# 🌸 Miffie 🌸
-#### Miffie — это новый и универсальный дискорд бот, созданый для упрощения управления серверами в дискорде, а так-же, для того чтобы дать людям хороший инструмент для различных нужд
-
-<div align="centre"><img src="https://media.discordapp.net/attachments/984299199967408163/991358811740835901/Screenshot_2022-06-28_09-05-14.png"></div>
+# Miffie
+<div align="centre"><img src="https://media.discordapp.net/attachments/984299199967408163/1006991520810946570/PicsArt_22-08-10_00-25-57-847.png"></div>
 
 ## Установка кода
 ```
@@ -24,13 +22,7 @@ module.exports = {
   cooldown: 3,
   premium: false, // true - премиум команда / false - не премиум команда
 
-  run: async (client, message, args) {
-    // // Нужно для изменения цвета для премиум-пользователей // //
-    const premSchema = require('../../database/premium.js');
-    const premuser = await premSchema.findOne({ User: message.author.id });
-    const color = `${premuser ? config.embeds.premium : config.embeds.color}`;
-    // // // //
-  
+  run: async (client, message, args) => {
     // ...
   }
 }
@@ -43,13 +35,13 @@ module.exports = {
     token: '', // Токен бота
     id: '', // Айди бота
     db: '', // MongoDB Database
-    devID: ['', ''], // Разработчики бота
+    devID: '' || '', // Разработчики бота
   },
   
   chat: {
     prefix: 'm/', // Префикс бота
     server: 'https://discord.gg/nacafe' // Сервер поддержки
-  },
+  },-
   
   embeds: { // Можете изменить при необходимости
     color: '#ff8bce',

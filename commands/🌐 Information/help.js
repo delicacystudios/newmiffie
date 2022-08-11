@@ -107,6 +107,11 @@ module.exports = {
           name: `Команды ${beta}`,
           value: `\`${prefix}enable-command [команда]\` — Включить команду
                   \`${prefix}disable-command [команда]\` — Выключить команду`
+        },
+        {
+          name: `Бэкапы ${beta}`,
+          value: `\`${prefix}create-backup\` — Создать бэкап сервера
+                  \`${prefix}load-backup [ID]\` — Загрузить бэкап сервера`
         }
       )
       .setImage(image)
