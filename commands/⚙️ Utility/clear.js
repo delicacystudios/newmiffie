@@ -1,91 +1,57 @@
-const { MessageEmbed, Permissions } = require('discord.js');
+const { MessageEmbed } = require("discord.js");
+const language = require('../../references/language');
 
 module.exports = {
-  name: 'clear',
-  aliases: ["purge", "очистить"],
+  name: "clear",
   category: "Utility",
-  description: "Очистка чата",  
+  aliases: ["purge", "clearmsgs"],
+  description: "Удалиить сообщения в чате",
   usage: "[количество]",
   cooldown: 3,
-  premium: false,
   
   run: async (client, message, args) => {
-    // // // // //
-    const premSchema = require('../../database/premium.js');
-    const prem = await premSchema.findOne({ User: message.author.id });
-    
-    const pgSchema = require('../../database/pg.js');
-    const guildPrem = await pgSchema.findOne({ GuildID: message.guild.id });
-    
-    const premuser = prem || guildPrem;
-    const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
-    // // // // 
-    
-    if (message.deletable) {
-      message.delete()
-    }
-    
-    const noperms = new MessageEmbed()
-      .setColor(config.embeds.error)
-      .setDescription(`У бота недостаточно прав! Пожалуйста, проверьте наличие права \`MANAGE_MESSAGES\``)
-    if (!message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) 
-      return message.channel.send({ embeds: [noperms] })
-    
-    if (!args[0]) 
-      return message.channel.send({ content: "Укажите количество сообщений которое хотите удалить" });
+    const { guild } = message;
+    if (!message.member.permissions.has("MANAGE_MESSAGES")) {
+      const embed = new MessageEmbed()
+        .setColor(client.config.embeds.error)
+        .setDescription(`${language(guild, 'NOPERMS')}`)
+      message.channel.send({ embeds: [embed] })
 
-    const noperms2 = new MessageEmbed()
-      .setColor(client.config.embeds.error)
-      .setDescription(`У вас недостаточно прав!`)
-    if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) 
-      return message.channel.send({ embeds: [noperms2] }) 
+    } else if (!args[0]) {
+      const embed2 = new MessageEmbed()
+        .setColor(client.config.embeds.error)
+        .setDescription(`${language(guild, 'CLEAR_MESSAGES')}`)
+      message.channel.send({ embeds: [embed2] })
 
-    const count = new MessageEmbed()
-      .setColor(client.config.embeds.error)
-      .setDescription(`Сообщение не содержит числа!`)
-    if (isNaN(args[0]) || parseInt(args[0]) <= 0) {
-      return message.channel.send({embeds: [count]})
-    }
+    } else if (isNaN(args[0])) {
+      const embed22 = new MessageEmbed()
+        .setColor(client.config.embeds.error)
+        .setDescription(`${language(guild, 'CLEAR_NUMBER')}`)
+      message.channel.send({ embeds: [embed22] })
 
-    let embed = new MessageEmbed()
-      .setColor(client.config.embeds.error)
-      .setDescription(`Ваше число превышает лимит в 100 сообщений`)
-    if(args[0] > 100) 
-      return message.channel.send({ embeds: [embed] }) 
-    
-    let deleteAmount;
-    if (parseInt(args[0]) > 100) {
-        deleteAmount = args[0];
+    } else if (args[0] > 100) {
+      const embed23 = new MessageEmbed()
+        .setColor(client.config.embeds.error)
+        .setDescription(`${language(guild, 'CLEAR_MSG1')} \`${args[0]}\` ${language(guild, 'CLEAR_MSG2')}`)
+      message.channel.send({ embeds: [embed23] })
+
     } else {
-        deleteAmount = parseInt(args[0]);
-    }
-    
-    if(message.mentions.users.size === 1) {
-      message.channel.messages.fetch({
-        limit: 100
-      }).then((messages) => {
-        let target = message.mentions.members.first();
-        let embed1 = new MessageEmbed()
-          .setColor(color)
-          .setDescription(`Удалено ${deleteAmount} сообщений`)
-        const botMessages = [];
-        messages.filter(m => m.author.id === target.id).forEach(msg => botMessages.push(msg))
-        message.channel.bulkDelete(deleteAmount, botMessages).then(() => {
-          message.channel.send({embeds: [embed1]});
-        })
-      })
-    }
-    
-    if(message.mentions.users.size === 0) {
-      message.channel.messages.fetch({
-        limit: 100
-      }).then((messages) => {
-        message.channel.bulkDelete(deleteAmount, true)
-        const embed1 = new MessageEmbed()
-         .setColor(color)
-         .setDescription(`Удалено ${deleteAmount} сообщений`)
-        message.channel.send({ embeds: [embed1] })
-          .catch(err => message.channel.send(`Что-то пошло не так...`));
+      let Reason = args.slice(1).join(" ") || "No Reason Provided!";
+      message.channel.bulkDelete(args[0]).then(Message => {
+        const embed = new MessageEmbed()
+          .setColor(client.config.embeds.color)
+          .setTitle(`${language(guild, 'CLEAR_T1')} ${Message.size} ${language(guild, 'CLEAR_T2')}`)
+          .addFields(
+            {
+              name: ` ${language(guild, 'CLEAR_R')} `,
+              value: `<@${message.author.id}> | \`(${message.author.id})\``
+            },
+            {
+              name: ` ${language(guild, 'CLEAR_C')} `,
+              value: `${message.channel.name} | \`(${message.channel.id})\``
+            }
+          )
+        message.channel.send({ embeds: [embed] })
       })
     }
   }

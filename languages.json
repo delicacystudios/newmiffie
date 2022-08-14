@@ -1,0 +1,429 @@
+{
+  "languages": ["ru", "en"],
+  "translations": {
+    "FOOTER": {
+      "ru": "© Все права защищены",
+      "en": "© All rights reserved"
+    },
+    "INVITE": {
+      "ru": "Пригласить",
+      "en": "Invite"
+    },
+    "INVITE_DESCR": {
+      "ru": "Получить ссылку на приглашение",
+      "en": "Get a link for invitation"
+    },
+    "INVITE_DESCRIPTION1": {
+      "ru": "Пригласите",
+      "en": "Invite"
+    },
+    "INVITE_DESCRIPTION2": {
+      "ru": "на ваш сервер :3",
+      "en": "to your server :3"
+    },
+    "HELP_CTG_INFO_EMB": {
+      "ru": "Категория: Информация",
+      "en": "Сategory: Information"
+    },
+    "HELP_CTG_UTIL_EMB": {
+      "ru": "Категория: Утилиты",
+      "en": "Сategory: Utility"
+    },
+    "HELP_CTG_FUN_EMB": {
+      "ru": "Категория: Веселье",
+      "en": "Сategory: Fun"
+    },
+     "HELP_CTG_MOD_EMB": {
+      "ru": "Категория: Модерация",
+      "en": "Сategory: Moderation"
+    },
+    "HELP_CTG_ADDONS_EMB": {
+      "ru": "Категория: Аддоны",
+      "en": "Сategory: Addons"
+    },
+    "HELP_CTG_PREM_EMB": {
+      "ru": "Категория: Премиум",
+      "en": "Сategory: Premium"
+    },
+    "NO_PREM_EMB": {
+      "ru": "Извините, но вам нужно иметь премиум, чтобы получить доступ к премиум функциям",
+      "en": "Sorry, bun you need to have Premium to get access to Premium futures"
+    },
+    "HELP_MAIN_EMB": {
+      "ru": "Помощь по командам",
+      "en": "Help Command"
+    },
+    "HELP_MAIN_DESCR1": {
+      "ru": "Чтобы получить справку по категориям команд бота используйте меню, которое есть под сообщением.",
+      "en": "To get help on bot command categories, use the menu below the message."
+    },
+    "HELP_MAIN_DESCR2": {
+      "ru": "Необязательные аргументы",
+      "en": "Optional Arguments"
+    },
+    "HELP_MAIN_DESCR3": {
+      "ru": "Обязательные аргументы",
+      "en": "Required arguments"
+    },
+    "HELP_MENU_PLACEHOLDER": {
+      "ru": "Выберите что-нибудь",
+      "en": "Choose something"
+    },
+    "HELP_MENU_INFO_LABEL": {
+      "ru": "Информация",
+      "en": "Information"
+    },
+    "HELP_MENU_INFO_DESC": {
+      "ru": "Получите различную информацию о Miffie",
+      "en": "Get various information about Miffie"
+    },
+    "HELP_MENU_UTIL_LABEL": {
+      "ru": "Утилиты",
+      "en": "Utility"
+    },
+    "HELP_MENU_UTIL_DESC": {
+      "ru": "Функции упрощающие использование Discord",
+      "en": "Features to make using Discord easier"
+    },
+    "HELP_MENU_FUN_LABEL": {
+      "ru": "Веселье",
+      "en": "Fun"
+    },
+    "HELP_MENU_FUN_DESC": {
+      "ru": "Весёлые и прикольные команды",
+      "en": "Funny and cool futures"
+    },
+    "HELP_MENU_ADDONS_LABEL": {
+      "ru": "Аддоны",
+      "en": "Addons"
+    },
+    "HELP_MENU_ADDONS_DESC": {
+      "ru": "Помогает управлять сервером",
+      "en": "Helps to control and setup a server"
+    },
+    "HELP_MENU_PREMIUM_LABEL": {
+      "ru": "Премиум",
+      "en": "Premium"
+    },
+    "HELP_MENU_PREMIUM_DESC": {
+      "ru": "Премиум функции",
+      "en": "Premium futures"
+    },
+    "HELP_MENU_TURNEDOFF": {
+      "ru": "Время выбора истекло!",
+      "en": "Choice time is up!"
+    },
+    "BUGREP_NOARGS": {
+      "ru": "Извините, но вам нужно написать что-то прежде чем отправить сообщение!",
+      "en": "Sorry, but you need to write something before sending a message!"
+    },
+    "BUGREP_THX": {
+      "ru": "Спасибо за репорт / идею. Мы обязательно рассмотрим её!",
+      "en": "Thanks for the report / idea. We will definitely look into it!"
+    },
+    "AVATAR": {
+      "ru": "не имеет аватара!",
+      "en": "dosn't have an avatar!"
+    },
+    "NOPERMS": {
+      "ru": "Извините, но у вас недостаточно прав!",
+      "en": "Sorry, but you don't have enough permissions!"
+    },
+    "NOPERMS_SEND": {
+      "ru": "У бота недостаточно прав для отправки сообщения в данный канал!",
+      "en": "The bot has insufficient rights to send a message to this channel!"
+    },
+    "CLEAR_MESSAGES": {
+      "ru": "Пожалуйста, укажите количество сообщений!",
+      "en": "Please enter the number of messages!"
+    },
+    "CLEAR_NUMBER": {
+      "ru": "Пожалуйста, укажите количество числом!",
+      "en": "Please enter quantity!"
+    },
+    "CLEAR_MSG1": {
+      "ru": "Вы не можете удалить",
+      "en": "You cannot delete"
+    },
+    "CLEAR_MSG2": {
+      "ru": "сообщений, потому что это привышает лимит Discord! Вы можете удалить только 100 сообщений за раз!",
+      "en": "messages, because it exceeds the Discord limit! You can only delete 100 messages at a time!"
+    },
+    "CLEAR_T1": {
+      "ru": "Удалено",
+      "en": "Deleted"
+    },
+    "CLEAR_T2": {
+      "ru": "сообщений!",
+      "en": "messages!"
+    },
+    "CLEAR_R": {
+      "ru": "Запрошено:",
+      "en": "Requested by;"
+    },
+    "CLEAR_C": {
+      "ru": "Канал:",
+      "en": "Channel:"
+    },
+    "SERVER_LEVEL1": {
+      "ru": "Нет",
+      "en": "None"
+    },
+    "SERVER_LEVEL2": {
+      "ru": "Низкий",
+      "en": "Low"
+    },
+    "SERVER_LEVEL3": {
+      "ru": "Средний",
+      "en": "Medium"
+    },
+    "SERVER_LEVEL4": {
+      "ru": "Высокий",
+      "en": "High"
+    },
+    "SERVER_LEVEL5": {
+      "ru": "Очень высокий",
+      "en": "Very high"
+    },
+    "SERVER_AUTHOR": {
+      "ru": "Информация по серверу:",
+      "en": "Server:"
+    },
+    "SERVER_SN": {
+      "ru": "Статистика участников",
+      "en": "User statistics"
+    },
+    "SERVER_S1": {
+      "ru": "Всего пользователей:",
+      "en": "Total:"
+    },
+    "SERVER_S2": {
+      "ru": "Всего участников:",
+      "en": "Users:"
+    },
+    "SERVER_S3": {
+      "ru": "Всего ботов:",
+      "en": "Bots:"
+    },
+    "SERVER_CN": {
+      "ru": "Статистика каналов",
+      "en": "Channel stats"
+    },
+    "SERVER_C1": {
+      "ru": "Всего каналов:",
+      "en": "Total:"
+    },
+    "SERVER_C2": {
+      "ru": "Текстовых:",
+      "en": "TC:"
+    },
+    "SERVER_C3": {
+      "ru": "Голосовых:",
+      "en": "VC:"
+    },
+    "SERVER_ON": {
+      "ru": "Допольнительная информация",
+      "en": "Other info"
+    },
+    "SERVER_O1": {
+      "ru": "Дата входа:",
+      "en": "Entry date:"
+    },
+    "SERVER_O2": {
+      "ru": "Дата создания:",
+      "en": "Date of creation:"
+    },
+    "SERVER_O3": {
+      "ru": "Уровень верификации:",
+      "en": "Verification level:"
+    },
+    "SERVER_O4": {
+      "ru": "Создатель:",
+      "en": "Owner:"
+    },
+    "SERVER_O": {
+      "ru": "",
+      "en": ""
+    },
+    "SERVER_F": {
+      "ru": "Аватар сервера:",
+      "en": "Server avatar:"
+    },
+    "LANG_NOARGS": {
+      "ru": "Извините, но вам нужно указать язык! [en, ru]",
+      "en": "Sorry, but you need to specify the language! [en, ru]"
+    },
+    "LANG_NOTSUPPORTED": {
+      "ru": "Данный язык не поддерживается!",
+      "en": "That language is not supported!"
+    },
+    "LANG_SEND": {
+      "ru": "Сейчас я говорю на русском!",
+      "en": "Now I speak in English!"
+    },
+    "PREFX_IND": {
+      "ru": "Вам необходимо указать новый префикс!",
+      "en": "You need to specify a new prefix!"
+    },
+    "PREFX_SIZE": {
+      "ru": "Ваш префикс должен содержать не более `3` символов!",
+      "en": "Your prefix must contain no more than `3` characters!"
+    },
+    "PREFX_A1": {
+      "ru": "Префикс",
+      "en": "Prefix"
+    },
+    "PREFX_A2": {
+      "ru": "был успешно установлен в —",
+      "en": "has been applied on —"
+    },
+    "PREFX_DEV": {
+      "ru": "Префикс вашего сервера был изменен разработчиком на",
+      "en": "Your server prefix has been changed by the developer to"
+    },
+    "SUDO_IND": {
+      "ru": "Пожалуйста, упомяните пользователя",
+      "en": "Please mention user"
+    },
+    "USER_INFO": {
+      "ru": "Информация о пользователе:",
+      "en": "User Information:"
+    },
+    "USER_MENTION": {
+      "ru": "彡 Упоминание:",
+      "en": "彡 Mention:"
+    },
+    "USER_PREMST": {
+      "ru": "彡 Премиум:",
+      "en": "彡 Premium:"
+    },
+    "USER_ROLES": {
+      "ru": "彡 Роли:",
+      "en": "彡 Roles:"
+    },
+    "ANS1": {
+      "ru": "Я вижу это в позитивном настроении",
+      "en": "I see it in a positive mood"
+    },
+    "ANS2": {
+      "ru": "Спроси позже)",
+      "en": "ask later)"
+    },
+    "ANS3": {
+      "ru": "Лучше тебе не знать",
+      "en": "It's better for you not to know"
+    },
+    "ANS4": {
+      "ru": "Не могу ответить сейчас",
+      "en": "Can't answer right now"
+    },
+    "ANS5": {
+      "ru": "Сосредоточьтесь и повторите вопрос",
+      "en": "Focus and repeat the question"
+    },
+    "ANS6": {
+      "ru": "Не считается",
+      "en": "Doesn't count"
+    },
+    "ANS7": {
+      "ru": "Это точно",
+      "en": "That's for sure"
+    },
+    "ANS8": {
+      "ru": "Это решительно так",
+      "en": "It is definitely so"
+    },
+    "ANS9": {
+      "ru": "Возможно :3",
+      "en": "May be :3"
+    },
+    "ANS10": {
+      "ru": "Мой ответ - нет",
+      "en": "My answer - no"
+    },
+    "ANS11": {
+      "ru": "Мои ресурсы говорят - нет",
+      "en": "My resources say no"
+    },
+    "ANS12": {
+      "ru": "Не такой уж и перспективный вопрос",
+      "en": "Not such a promising question"
+    },
+    "ANS13": {
+      "ru": "Перспектива хорошая",
+      "en": "The outlook's good"
+    },
+    "ANS14": {
+      "ru": "Ответ неуверенный, попробуйте еще раз",
+      "en": "Uncertain answer, please try again"
+    },
+    "ANS15": {
+      "ru": "Знаки указывают на положительный ответ",
+      "en": "Signs indicate a positive response"
+    },
+    "ANS16": {
+      "ru": "Очень сомнительно",
+      "en": "Very doubtful"
+    },
+    "ANS17": {
+      "ru": "Не знаю",
+      "en": "IDK"
+    },
+    "ANS18": {
+      "ru": "Да",
+      "en": "Yes"
+    },
+    "ANS19": {
+      "ru": "Да, безусловно",
+      "en": "Yes, of course"
+    },
+    "ANS20": {
+      "ru": "Возможно ты к этому относишься :3",
+      "en": "Maybe you're into this :3"
+    },
+    "ANS_8BALL": {
+      "ru": "8Ball отвечает:",
+      "en": "8Ball answers:"
+    },
+    "ASCII_ERR1": {
+      "ru": "Вам нужно ввести сообщение, для того, чтобы получить ascii версию!",
+      "en": "You need to enter a message in order to get the ascii version!"
+    },
+    "ASCII_ERR2": {
+      "ru": "Ваше сообщение не должно привышать 8 символов!",
+      "en": "Your message must not exceed 8 characters!"
+    },
+    "CF_TAIL": {
+      "ru": "Решка",
+      "en": "Tails"
+    },
+    "CF_HEAD": {
+      "ru": "Орёл",
+      "en": "Heads"
+    },
+    "CF_ANS": {
+      "ru": "Выпала",
+      "en": "Its"
+    },
+    "KISS": {
+      "ru": "целует",
+      "en": "kisses"
+    },
+    "PUNCH": {
+      "ru": "бъёт",
+      "en": "punches"
+    },
+    "SLAP": {
+      "ru": "бъёт по щеке",
+      "en": "slaps"
+    },
+    "SLAP_ERR": {
+      "ru": "Ой-ой, кажется вы не указали человека",
+      "en": "Oops, it seems you didn't specify the person."
+    },
+    "": {
+      "ru": "",
+      "en": ""
+    }
+  }
+}

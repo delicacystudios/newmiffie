@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const random = require('random');
+const language = require('../../references/language')
 
 module.exports = {
   name: "8ball",
@@ -11,6 +12,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {
+    const { guild }= message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -20,35 +22,35 @@ module.exports = {
     
     const premuser = prem || guildPrem;
     const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
-    const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} © Все права защищены`
+    const namefooter = `${premuser ? `👑 ${client.user.username}` : `${client.user.username}`} ${language(guild, 'FOOTER')}`
     // // // //
 
     let answers = [
-      'Я вижу это в позитивном настроении', 
-      'Спроси позже)', 
-      'Лучше тебе не знать', 
-      'Не могу ответить сейчас', 
-      'Сосредоточьтесь и повторите вопрос', 
-      'Не считается', 
-      'Это точно', 
-      'Это решительно так', 
-      'Возможно :3', 
-      'Мой ответ - нет', 
-      'Мои ресурсы говорят - нет', 
-      'Не такой уж и перспективный вопрос', 
-      'Перспектива хорошая', 
-      'Ответ неуверенный, попробуйте еще раз', 
-      'Знаки указывают на положительный ответ', 
-      'Очень сомнительно', 
-      'Не знаю', 
-      'Да', 
-      'Да, безусловно', 
-      'Возможно ты к этому относишься :3'
+      `${language(guild, 'ANS1')}`,
+      `${language(guild, 'ANS2')}`,
+      `${language(guild, 'ANS3')}`,
+      `${language(guild, 'ANS4')}`,
+      `${language(guild, 'ANS5')}`,
+      `${language(guild, 'ANS6')}`,
+      `${language(guild, 'ANS7')}`,
+      `${language(guild, 'ANS8')}`,
+      `${language(guild, 'ANS9')}`,
+      `${language(guild, 'ANS10')}`,
+      `${language(guild, 'ANS11')}`,
+      `${language(guild, 'ANS12')}`,
+      `${language(guild, 'ANS13')}`,
+      `${language(guild, 'ANS14')}`,
+      `${language(guild, 'ANS15')}`,
+      `${language(guild, 'ANS16')}`,
+      `${language(guild, 'ANS17')}`,
+      `${language(guild, 'ANS18')}`,
+      `${language(guild, 'ANS19')}`,
+      `${language(guild, 'ANS20')}`
     ]
     
     let response = random.int(0, answers.length - 1)
     let embed = new MessageEmbed()
-      .setTitle('8Ball ответчает:')
+      .setTitle(`${language(guild, 'ANS_8BALL')}`)
       .setColor(color)
       .setDescription(answers[response])
       .setFooter({ text: `${namefooter}` })

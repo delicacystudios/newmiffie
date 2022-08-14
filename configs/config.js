@@ -1,9 +1,10 @@
 module.exports = {
   bot: {
     token: process.env['TOKEN'],
-    id: '944341740243017728',
+    id: '947810923593203732',
     db: process.env['MongoDB'],
-    devID: '528930032823959562' || '564845500160016395'
+    devID: '528930032823959562' || '564845500160016395',
+    language: 'en'
   },
   
   chat: {
@@ -23,15 +24,8 @@ module.exports = {
     CatKey: process.env['CatKey']
   },
   
-  player: {
-    maxVol: 100,
-    loopMessage: false,
-    discordPlayer: {
-      ytdlOptions: {
-        quality: 'highestaudio',
-        highWaterMark: 1 << 25
-      }
-    }
+  systems: {
+    bugreport: '1007457075338690650' // канал для репортов
   },
   
   port: 20,

@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const language = require('../../references/language');
 const slaps = [
   "https://i.giphy.com/media/3XlEk2RxPS1m8/giphy.gif",
   "https://i.giphy.com/media/mEtSQlxqBtWWA/giphy.gif",
@@ -21,6 +22,7 @@ module.exports = {
   usage: "<пользователь>",
   
   run: async (client, message, args) => {
+    const { guild } = message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -39,13 +41,13 @@ module.exports = {
     if (!user) {
       const embed = new MessageEmbed()
         .setColor(client.config.embeds.error)
-        .setDescription('Ой-ой, кажется вы не указали человека')
+        .setDescription(`${language(guild, 'SLAP_ERR')}`)
       message.channel.send({ embeds: [embed] })
     } else {
       const embed2 = new MessageEmbed()
         .setColor(color)
         .setImage(slaps[Math.floor(Math.random() * slaps.length)])
-        .setFooter({ text: `${message.author.username} ударил(-а) ${user.user.username}` })
+        .setFooter({ text: `${message.author.username} ${language(guild, 'SLAP')} ${user.user.username}` })
       message.channel.send({ embeds: [embed2] })
     }
   }

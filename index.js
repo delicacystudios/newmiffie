@@ -1,7 +1,7 @@
 const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 const client = new Client({
     intents: 32767
-});
+})
 const GuildSettings = require("./database/settings.js");
 const chalk = require('chalk');
 
@@ -13,22 +13,7 @@ client.commands = new Collection();
 client.aliases = new Collection();
 client.config = require('./configs/config.js');
 client.emotes = require('./configs/emoji.js');
-
-////
-
-////
-
-// -------------- //
-const path = require("path");
-const { I18n } = require('i18n');
-
-const i18n = new I18n({
-  locales: ['ru', 'en'],
-  directory: path.join(__dirname, '.', 'locales')
-})
-// -------------- //
-
-//////////////////////////////////////////
+client.lang = require('./references/language');
 
 //////////////////////////////////////////
 
@@ -54,7 +39,8 @@ fs.readdirSync('./events/').forEach(dirs => {
   }
 })
 
-//////////////////////////////////////////
+////////////////////////////////////////// Music
+
 //////////////////////////////////////////
 
 client.on('messageCreate', async (message) => {
@@ -111,7 +97,7 @@ client.login(client.config.bot.token)
 
 process.on('unhandledRejection', (error) => {
   console.log(chalk.redBright.bgBlack('[API] Произошла неизвестная ошибка'))
-  console.log(chalk.whiteBright.bgBlack(error))
+  console.log(error)
 });
 
 process.on('unhandledPromiseRejection', (e) => {

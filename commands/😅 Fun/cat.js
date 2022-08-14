@@ -38,7 +38,7 @@ module.exports = {
       message.reply({ embeds: [embed] })
 
     }).catch(err => 
-      message.channel.send({ content: 'Произошла ошибка!' })
+      message.channel.send({ content: 'An error has occured!' })
     )
   }
 }

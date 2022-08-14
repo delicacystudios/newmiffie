@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const language = require('../../references/language');
 
 module.exports = {
   name: 'avatar',
@@ -10,6 +11,7 @@ module.exports = {
   premium: false,
 
   run: async (client, message, args) => {
+    const { guild } = message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -35,7 +37,7 @@ module.exports = {
         (err) => {
           const embed = new MessageEmbed()
             .setColor(config.embeds.error)
-            .setDescription(`${member.user.username} не имеет аватара!`);
+            .setDescription(`${member.user.username} ${language(guild, 'AVATAR')}`);
           message.channel.send({ embeds: [embed] })
         }
       )

@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const language = require('../../references/language');
 
 module.exports = {
   name: 'server',
@@ -10,7 +11,6 @@ module.exports = {
   premium: false,
 
   run: async (client, message, args) => {
-    
     //-- Prefix Stuff --//
     const GuildSettings = require("../../database/settings.js");
     let storedSettings = await GuildSettings.findOne({
@@ -62,42 +62,42 @@ module.exports = {
     
     if (!args[0]) {
       let verifLevels = {
-        NONE: "Нет",
-        LOW: "Низкий",
-        MEDIUM: "Средний",
-        HIGH: "Высокий",
-        VERY_HIGH: "Очень высокий",
+        NONE: `${language(guild, 'SERVER_LEVEL1')}`,
+        LOW: `${language(guild, 'SERVER_LEVEL2')}`,
+        MEDIUM: `${language(guild, 'SERVER_LEVEL3')}`,
+        HIGH: `${language(guild, 'SERVER_LEVEL4')}`,
+        VERY_HIGH: `${language(guild, 'SERVER_LEVEL5')}`,
       };
 
       const serverembed = new MessageEmbed()
-        .setAuthor({ name: `Информация по серверу: ${message.guild.name}` })
+        .setAuthor({ name: `${language(guild, 'SERVER_AUTHOR')} ${message.guild.name}` })
         .setThumbnail(avatar)
         .setColor(color)
         .addFields(
           {
-            name: `Статистика участников`,
+            name: `${language(guild, 'SERVER_SN')}`,
             value: `
-            > Всего участников: \`${message.guild.memberCount}\`
-            > Людей: \`${message.guild.members.cache.filter((member) => !member.user.bot).size}\`
-            > Ботов: \`${message.guild.members.cache.filter((member) => member.user.bot).size}\` \n_ _`,
+            > ${language(guild, 'SERVER_S1')}: \`${message.guild.memberCount}\`
+            > ${language(guild, 'SERVER_S2')}: \`${message.guild.members.cache.filter((member) => !member.user.bot).size}\`
+            > ${language(guild, 'SERVER_S3')}: \`${message.guild.members.cache.filter((member) => member.user.bot).size}\` \n_ _`,
           },
           {
-            name: `Статистика каналов`,
+            name: `${language(guild, 'SERVER_CN')}`,
             value: `
-            > Всего каналов: \`${message.guild.channels.cache.size}\` 
-            > Текстовых каналов: \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_TEXT").size}\` 
-            > Голосовых каналов: \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_VOICE").size}\` \n_ _`,
+            > ${language(guild, 'SERVER_C1')} \`${message.guild.channels.cache.size}\` 
+            > ${language(guild, 'SERVER_C2')} \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_TEXT").size}\` 
+            > ${language(guild, 'SERVER_C3')} \`${message.guild.channels.cache.filter((c) => c.type === "GUILD_VOICE").size}\` \n_ _`,
           },
           {
-            name: `Дополнительная информация`,
+            name: `${language(guild, 'SERVER_ON')}`,
             value: `
-            > Дата входа: \`${message.member.joinedAt.toLocaleString()}\` 
-            > Дата создания: \`${message.guild.createdAt.toLocaleString()}\`
-            > Уровень верификации: \`${verifLevels[message.guild.verificationLevel]}\`
-            > Создатель: <@${message.guild.ownerId}> \n_ _`
+            > ${language(guild, 'SERVER_O1')} \`${message.member.joinedAt.toLocaleString()}\` 
+            > ${language(guild, 'SERVER_O2')} \`${message.guild.createdAt.toLocaleString()}\`
+            > ${language(guild, 'SERVER_O3')} \`${verifLevels[message.guild.verificationLevel]}\`
+            > ${language(guild, 'SERVER_O4')} <@${message.guild.ownerId}> \n_ _`
           }
         )
-        .setFooter({ text: `Аватар сервера: ${prefix}server avatar` })
+        .setFooter({ text: `${language(guild, 'SERVER_F')} ${prefix}server avatar` })
       message.channel.send({ embeds: [serverembed] })
     }
     

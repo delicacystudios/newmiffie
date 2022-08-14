@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const premSchema = require("../../database/premium.js");
+const language = require('../../references/language');
 
 module.exports = {
   name: 'user',
@@ -11,6 +12,7 @@ module.exports = {
   premium: false,
 
   run: async (client, message) => {
+    const { guild } = message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -20,7 +22,7 @@ module.exports = {
     
     const premuser = prem || guildPrem;
     const color = `${premuser ? client.config.embeds.premium : client.config.embeds.color}`;
-    const namefooter = `${premuser ? `👑 ${client.user.username} Premium` : `${client.user.username}`} © Все права защищены`
+    const namefooter = `${premuser ? `👑 ${client.user.username} Premium` : `${client.user.username}`} ${language(guild, 'FOOTER')}`
     // // // //
 
     let member = message.mentions.members.first() || message.member || client.users.cache.get(args[0]);
@@ -40,36 +42,36 @@ module.exports = {
       ava = member.avatarURL({ dynamic: false, size: 1024 })
     }
     
-    let avatar = ava ? ava : ``;
+    let avatar = premuser ? ava : ava;
 
     if (member) {
       const mention = message.mentions.members.first() || message.member || client.users.cache.get(args[0]);
       const embed = new MessageEmbed()
         .setColor(color)
         .setThumbnail(avatar)
-        .setTitle(`Информация о пользователе: ${member.displayName}`)
+        .setTitle(`${language(guild, 'USER_INFO')} ${member.displayName}`)
         .addFields(
           {
-            name: '`  彡 Упоминание:  `',
+            name: `\`  ${language(guild, 'USER_MENTION')}  \``,
             value: `> <@${member.user.id}>`,
             inline: true
           },
           {
-            name: '`  彡 Премиум:  `',
+            name: `\`  ${language(guild, 'USER_PREMST')}  \``,
             value: `> ${premMember ? ps.yes : ps.no}`,
             inline: true
           },
           {
-            name: '`  彡 Дата входа:  `',
+            name: `\`  ${language(guild, 'SERVER_O1')}  \``,
             value: `> \`${mention.joinedAt.toLocaleString()}\``,
           },
           {
-            name: '`  彡 Дата создания:  `',
+            name: `\`  ${language(guild, 'SERVER_O2')}  \``,
             value: `> \`${mention.user.createdAt.toLocaleString()}\``,
             inline: true
           },
           {
-            name: '`  彡 Роли:  `', 
+            name: `\`  ${language(guild, 'USER_ROLES')}  \``, 
             value: `> ${member.roles.cache.map(r => `${r}`).join(' | ')}`,
           }
         )

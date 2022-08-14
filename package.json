@@ -30,7 +30,9 @@
     "discord-backup": "^3.2.1",
     "discord-player": "^5.3.1",
     "discord.js": "^13.9.2",
+    "distube": "^3.0.0",
     "ejs": "^3.1.8",
+    "erela.js": "^2.3.3",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "ffmpeg": "^0.0.4",
@@ -44,7 +46,6 @@
     "mongoose": "^6.3.8",
     "passport": "^0.6.0",
     "passport-discord": "^0.1.4",
-    "quick.db": "^9.0.3",
     "random": "^3.0.6",
     "some-random-cat": "^2.4.0",
     "something-random-on-discord": "^3.4.4",
@@ -56,6 +57,13 @@
     "ytsr": "^3.8.0"
   },
   "devDependencies": {
-    "node": "^16.13.2"
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.4",
+    "autoprefixer": "^10.4.8",
+    "node": "^16.13.2",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }

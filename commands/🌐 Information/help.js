@@ -1,10 +1,11 @@
 const { MessageEmbed, MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
 const GuildSettings = require("../../database/settings.js");
-const i18n = require("../../references/i18n.js");
+
+const language = require('../../references/language')
 
 module.exports = {
   name: "help",
-  description: i18n.__("infoctg.help.description"),
+  description: `Основная команда`,
   usage: "",
   category: "Information",
   cooldown: 3,
@@ -30,6 +31,8 @@ module.exports = {
     const funem = client.emotes.categories.functg;
     const premem = client.emotes.categories.premctg;
     // // // //
+
+    const { guild } = message;
 
     let storedSettings = await GuildSettings.findOne({
       guildID: message.guild.id,
@@ -57,7 +60,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const general = new MessageEmbed()
-      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.info")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${language(guild, 'HELP_CTG_INFO_EMB')} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Info)
       .setFooter({ text: `${premstatus}` })
@@ -71,7 +74,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const util = new MessageEmbed()
-      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.utils")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${language(guild, 'HELP_CTG_UTIL_EMB')} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Util)
       .setImage(image)
@@ -85,7 +88,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const fun = new MessageEmbed()
-      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.fun")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${language(guild, 'HELP_CTG_FUN_EMB')} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Fun)
       .setImage(image)
@@ -95,7 +98,7 @@ module.exports = {
     ///// ///// ///// ///// /////
 
     const mod = new MessageEmbed()
-      .setAuthor({ name: `♡ Категория: Аддоны ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${language(guild, 'HELP_CTG_ADDONS_EMB')} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .addFields(
         {
@@ -123,7 +126,7 @@ module.exports = {
         `\`${prefix}` + x.name + `${x.usage ? " " + x.usage : ""}\` — ` + x.description + ``).join('\n');
 
     const premembed = new MessageEmbed()
-      .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.menu.embeds.premium")} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
+      .setAuthor({ name: `♡ ${language(guild, 'HELP_CTG_PREM_EMB')} ♡`, iconURL: client.user.displayAvatarURL({ dynamic: true, size: 4096 }) })
       .setColor(color)
       .setDescription(Prem)
       .setImage(image)
@@ -132,7 +135,7 @@ module.exports = {
 
     const nopremi = new MessageEmbed()
       .setColor(color)
-      .setDescription(`${i18n.__("infoctg.help.introembed.menu.embeds.premerr")}`)
+      .setDescription(`${language(guild, 'NO_PREM_EMB')}`)
       .setImage(image)
       .setFooter({ text: `${premstatus}` })
       .setTimestamp()
@@ -141,47 +144,47 @@ module.exports = {
 
     if (!args[0]) {
       const intro = new MessageEmbed()
-        .setAuthor({ name: `♡ ${i18n.__("infoctg.help.introembed.title")} ${premstatus} ♡` })
+        .setAuthor({ name: `♡ ${language(guild, 'HELP_MAIN_EMB')} ${premstatus} ♡` })
         .setColor(color)
-        .setDescription(`${i18n.__("infoctg.help.introembed.description.main")}
+        .setDescription(`${language(guild, 'HELP_MAIN_DESCR1')}
 
-\`< >\` — ${i18n.__("infoctg.help.introembed.description.tip1")}
-\`[ ]\` — ${i18n.__("infoctg.help.introembed.description.tip2")}`)
+\`< >\` — ${language(guild, 'HELP_MAIN_DESCR2')}
+\`[ ]\` — ${language(guild, 'HELP_MAIN_DESCR3')}`)
         .setImage(image)
 
       const helpMenu = new MessageActionRow()
         .addComponents(
           new MessageSelectMenu()
             .setCustomId('help-menu')
-            .setPlaceholder(`${i18n.__("infoctg.help.menu.main")}`)
+            .setPlaceholder(`${language(guild, 'HELP_MENU_PLACEHOLDER')}`)
             .addOptions([
               {
-                label: `${i18n.__("infoctg.help.menu.options.info.name")}`,
-                description: `${i18n.__("infoctg.help.menu.options.info.description")}`,
+                label: `${language(guild, 'HELP_MENU_INFO_LABEL')}`,
+                description: `${language(guild, 'HELP_MENU_INFO_DESC')}`,
                 value: `1`,
                 emoji: `${infoem}`
               },
               {
-                label: `${i18n.__("infoctg.help.menu.options.utils.name")}`,
-                description: `${i18n.__("infoctg.help.menu.options.utils.description")}`,
+                label: `${language(guild, 'HELP_MENU_UTIL_LABEL')}`,
+                description: `${language(guild, 'HELP_MENU_UTIL_DESC')}`,
                 value: `2`,
                 emoji: `${utilem}`
               },
               {
-                label: `${i18n.__("infoctg.help.menu.options.fun.name")}`,
-                description: `${i18n.__("infoctg.help.menu.options.fun.description")}`,
+                label: `${language(guild, 'HELP_MENU_FUN_LABEL')}`,
+                description: `${language(guild, 'HELP_MENU_FUN_DESC')}`,
                 value: `3`,
                 emoji: `${funem}`
               },
               {
-                label: `Аддоны`,
-                description: `Помогает управлять сервером`,
+                label: `${language(guild, 'HELP_MENU_ADDONS_LABEL')}`,
+                description: `${language(guild, 'HELP_MENU_ADDONS_DESC')}`,
                 value: `4`,
                 emoji: `${modem}`
               },
               {
-                label: `${i18n.__("infoctg.help.menu.options.premium.name")}`,
-                description: `${i18n.__("infoctg.help.menu.options.premium.description")}`,
+                label: `${language(guild, 'HELP_MENU_PREMIUM_LABEL')}`,
+                description: `${language(guild, 'HELP_MENU_PREMIUM_DESC')}`,
                 value: `5`,
                 emoji: `${premem}`
               },
@@ -235,9 +238,10 @@ module.exports = {
         embed: intro,
         component: helpMenu
       }
+      const onwer = await client.users.cache.get(message.author.id);
 
-      const mss12 = await message.reply({ embeds: [content.embed], components: [content.component] }).catch(
-        (e) => message.channel.send({ embeds: [content.embed], components: [content.component] })
+      const mss12 = await message.channel.send({ embeds: [content.embed], components: [content.component] }).catch(
+        (e) => onwer.send({ content: `${language(guild, 'NOPERMS_SEND')}` })
       )
 
       collector.on('end', async message => {
@@ -245,7 +249,7 @@ module.exports = {
           .addComponents(
             new MessageSelectMenu()
               .setCustomId('help-menu')
-              .setPlaceholder(`${i18n.__("infoctg.help.menu.timeout")}`)
+              .setPlaceholder(`${language(guild, 'HELP_MENU_TURNEDOFF')}`)
               .setDisabled(true)
               .addOptions([
                 {

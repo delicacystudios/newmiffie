@@ -1,14 +1,13 @@
 const premSchema = require("../../database/premium.js");
 const Dashboard = require("../../dashboard/dashboard.js");
 const dbase = require('../../database/structure.js')
-const lang = require("../../references/lang.js")
+const { loadLanguages } = require('../../references/language');
 
 module.exports = async (client) => {
   console.log('——————————————————————————————————————————')
   console.log(`| 🌐 Установлено соединение: ${client.user.tag}`)
   console.log(`| ⚙️  ID Бота: ${client.user.id}`)
   console.log(`| ⚙️  Префикс бота: ${client.config.chat.prefix}`)
-  console.log(`| 💠 Локализации: ${(await lang.getLocaleCodes()).join(', ')}`)
   console.log('——————————————————————————————————————————')
 
   let i = 0;
@@ -24,10 +23,12 @@ module.exports = async (client) => {
     i = i + 1
     if (i === activity.length) i = i - activity.length
   }, 10000)
-  client.user.setStatus('idle');
+  client.user.setStatus('online');
 
   dbase(client);
   Dashboard(client);
+  loadLanguages(client);
+  
   for (const [id, guild] of client.guilds.cache) {
     await guild.members.fetch();
   }

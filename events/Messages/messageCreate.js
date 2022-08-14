@@ -7,6 +7,9 @@ const GuildSettings = require("../../database/settings.js");
 const BlackListSchema = require('../../database/blacklist.js');
 const commandsSchema = require('../../database/commands.js');
 
+const languageSchema = require('../../database/languages');
+const { setLanguage } = require('../../references/language');
+
 
 module.exports = async (client, message) => {
   // // // // //
@@ -22,7 +25,28 @@ module.exports = async (client, message) => {
   const blacklisted = await BlackListSchema.findOne({
     Server: message.guild.id
   });
+
   // // // //
+  
+  const { guild } = message;
+  const data2323 = await languageSchema.findOne({
+    GuildID: guild.id
+  })
+
+  if (!data2323) {
+    setLanguage(guild, client.config.bot.language)
+    const lala = new languageSchema({
+      GuildID: guild.id,
+      Language: client.config.bot.language
+    })
+
+    lala.save()
+    
+  } else {
+    await languageSchema.findOne({
+      GuildID: guild.id
+    })
+  }
 
   if (!message.channel.permissionsFor(message.guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
     return

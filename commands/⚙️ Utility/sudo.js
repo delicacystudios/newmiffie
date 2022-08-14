@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const language = require('../../references/language');
 
 module.exports = {
   name: "sudo",
@@ -18,7 +19,7 @@ module.exports = {
     if (!user) {
       const mem = new MessageEmbed()
         .setColor(client.config.embeds.error)
-        .setDescription(`Пожалуйста, укажите пользователя`)
+        .setDescription(`${language(guild, 'SUDO_IND')}`)
       message.channel.send({ embeds: [mem] })
     } else {
       const webhook = await message.channel.createWebhook(user.displayName, {

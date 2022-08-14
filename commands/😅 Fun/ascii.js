@@ -1,5 +1,6 @@
 const { MessageEmbed } = require ('discord.js');
 const figlet = require ("figlet");
+const language = require('../../references/language')
 
 module.exports = {
   name: "ascii",
@@ -11,17 +12,18 @@ module.exports = {
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {
+    const { guild }= message;
     figlet.text(args.join(" "), (err, text) => {
       if (!args.join(" ")) {
         const errorem = new MessageEmbed()
           .setColor(client.config.embeds.error)
-          .setDescription("Вам нужно ввести сообщение, для того, чтобы получить ascii версию!")
+          .setDescription(`${language(guild, 'ASCII_ERR1')}`)
         message.channel.send({ embeds: [errorem] })
         
       } else if (args.join(" ").length > 10) {
         const moret = new MessageEmbed()
           .setColor(client.config.embeds.error)
-          .setDescription('Ваше сообщение не должно привышать 8 символов!')
+          .setDescription(`${language(guild, 'ASCII_ERR2')}`)
         message.channel.send({ embeds: [moret] })
         
       } else if (args.join(" ")) {

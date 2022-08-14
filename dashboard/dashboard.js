@@ -37,8 +37,9 @@ module.exports = async (client) => {
   if (config.CustomDomain) {
     callbackUrl = `${domain.protocol}//${domain.host}/callback`;
   } else {
-    callbackUrl = `${domain.protocol}//${domain.host}${config.port == 80 ? "" : `:${config.port}`
-      }/callback`;
+    callbackUrl = `${domain.protocol}//${domain.host}${
+      config.port == 80 ? "" : `:${config.port}`
+    }/callback`;
   }
 
   passport.use(
@@ -59,7 +60,7 @@ module.exports = async (client) => {
     session({
       store: new MemoryStore({ checkPeriod: 86400000 }),
       secret:
-        "#@%#&^$^$%@$^$&%#$%@#$%$^%&$%^#$%@#$%#E%#%@$FEErfgr3g#%GT%536c53cc6%5%tv%4y4hrgrggrgrgf4n",
+				"#@%#&^$^$%@$^$&%#$%@#$%$^%&$%^#$%@#$%#E%#%@$FEErfgr3g#%GT%536c53cc6%5%tv%4y4hrgrggrgrgf4n",
       resave: false,
       saveUninitialized: false
     })
@@ -125,14 +126,14 @@ module.exports = async (client) => {
       req,
       res
     ) => {
-    if (req.session.backURL) {
-      const backURL = req.session.backURL;
-      req.session.backURL = null;
-      res.redirect(backURL);
-    } else {
-      res.redirect("/dashboard");
+      if (req.session.backURL) {
+        const backURL = req.session.backURL;
+        req.session.backURL = null;
+        res.redirect(backURL);
+      } else {
+        res.redirect("/");
+      }
     }
-  }
   );
 
   app.get("/logout", function(req, res) {
@@ -154,19 +155,14 @@ module.exports = async (client) => {
 
   app.get("/dashboard/:guildID", checkAuth, async (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildID);
-    if (!guild) return res.redirect("/dashboard/commands");
-
-    ////////////// ////////////// //////////////
-
-    ////////////// ////////////// //////////////
-
-    let member = guild.members.cache.get(req.user.id)
+    if (!guild) return res.redirect("/dashboard");
+    let member = guild.members.cache.get(req.user.id);
     if (!member) {
       try {
         await guild.members.fetch();
         member = guild.members.cache.get(req.user.id);
       } catch (err) {
-        console.log(`Couldn't fetch the members of ${guild.id}: ${err}`)
+        console.error(`Couldn't fetch the members of ${guild.id}: ${err}`)
       }
     }
     if (!member) return res.redirect("/dashboard");
@@ -195,16 +191,9 @@ module.exports = async (client) => {
   app.post("/dashboard/:guildID", checkAuth, async (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildID);
     if (!guild) return res.redirect("/dashboard");
-
     const member = guild.members.cache.get(req.user.id);
     if (!member) return res.redirect("/dashboard");
     if (!member.permissions.has("MANAGE_GUILD")) {
-      return res.redirect("/dashboard")
-    }
-
-    const dev = config.bot.devID;
-    if (!dev) return res.redirect("/dashboard");
-    if (!client.user.permissions.has("MANAGE_GUILD")) {
       return res.redirect("/dashboard")
     }
 
@@ -227,7 +216,7 @@ module.exports = async (client) => {
     renderTemplate(res, req, "settings.ejs", {
       guild,
       settings: storedSettings,
-      alert: "Ваши настройки были сохранены!",
+      alert: "Your settings have been saved.",
     });
   });
 

@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { Random } = require("something-random-on-discord");
+const language = require('../../references/language');
 
 module.exports = {
   name: "kiss",
@@ -10,6 +11,7 @@ module.exports = {
   usage: "<пользователь>",
   
   run: async (client, message, args) => {
+    const { guild } = message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -30,7 +32,7 @@ module.exports = {
     const embed = new MessageEmbed()
       .setColor(color)
       .setImage(data)
-      .setFooter({ text: `${message.author.username} kisses ${target.user.username}` })
+      .setFooter({ text: `${message.author.username} ${language(guild, 'KISS')} ${target.user.username}` })
       .setTimestamp();
     message.channel.send({ embeds: [embed] });
   }

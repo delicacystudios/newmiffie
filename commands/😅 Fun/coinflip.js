@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../configs/config.js');
+const language = require('../../references/language')
 const random = require('random');
 
 module.exports = {
@@ -12,6 +12,7 @@ module.exports = {
   permissions: ["SEND_MESSAGES"],
 
   run: async (client, message, args) => {
+    const { guild } = message;
     // // // // //
     const premSchema = require('../../database/premium.js');
     const prem = await premSchema.findOne({ User: message.author.id });
@@ -24,15 +25,15 @@ module.exports = {
     // // // //
     
     let coin = [
-      'Орёл', 
-      'Решка'
+      `${language(guild, 'CF_HEAD')}`, 
+      `${language(guild, 'CF_TAIL')}`
     ]
     
     const index = random.int(0, coin.length - 1)
     let result = (coin[index])
     
     let embed = new MessageEmbed()
-      .setTitle(`Выпал(-а) ${result}`)
+      .setTitle(`${language(guild, 'CF_ANS')} ${result}`)
       .setColor(color)
     message.reply({ embeds: [embed] })
   }
